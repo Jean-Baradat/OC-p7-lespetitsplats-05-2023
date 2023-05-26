@@ -1,0 +1,31 @@
+{
+  "name": "oc-p7-lespetitsplats-05-2023",
+  "version": "0.0.1",
+  "description": "Projet 7 - Développez un algorithme de recherche en JavaScript",
+  "scripts": {
+    "sass": "sass --watch ./public/assets/sass/style.scss:./public/assets/css/style.css",
+    "sass-compressed": "sass --watch ./public/assets/sass/style.scss:./public/assets/css/style.min.css --style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jean-Baradat/OC-p7-lespetitsplats-05-2023.git"
+  },
+  "keywords": [
+    "javascript",
+    "algorithme",
+    "recherche",
+    "recette",
+    "cuisine",
+    "filtrage",
+    "tri"
+  ],
+  "author": "Jean Baradat",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jean-Baradat/OC-p7-lespetitsplats-05-2023/issues"
+  },
+  "homepage": "https://github.com/Jean-Baradat/OC-p7-lespetitsplats-05-2023#readme",
+  "dependencies": {
+    "sass": "^1.62.1"
+  }
+}
