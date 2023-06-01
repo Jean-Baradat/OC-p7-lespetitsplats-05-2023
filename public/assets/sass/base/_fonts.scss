@@ -1,1 +1,1 @@
-@import url('https://fonts.googleapis.com/css2?#{parameter($mainFont, $wghtAndStyle)}');
+@import url('https://fonts.googleapis.com/css2?#{fontParameter($mainFont, $secondaryFont, $thirdFont, $wghtAndStyle)}');

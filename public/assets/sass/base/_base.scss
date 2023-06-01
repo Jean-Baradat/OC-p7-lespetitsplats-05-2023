@@ -14,16 +14,31 @@ html {
 
 body {
     font-family: $mainFont, sans-serif;
+    @include global-max-screen-width;
+    padding: 0 2rem;
 }
 
-h1,
+h1 {
+    font-size: 2rem;
+    color: $darkCoral;
+    font-family: $secondaryFont, sans-serif;
+    text-align: center;
+}
+
 h2 {
     font-size: 1.5rem;
-    font-weight: bold;
 }
 
 h3 {
     font-size: 1.2rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-weight: bold;
 }
 
@@ -39,4 +54,8 @@ a {
 .full-width-center {
     width: 100%;
     text-align: center;
+}
+
+.bold {
+    font-weight: bold;
 }

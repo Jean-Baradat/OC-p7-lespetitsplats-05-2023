@@ -1,0 +1,22 @@
+.home {
+    margin-bottom: 5rem;
+
+    .cards-area {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: auto;
+        gap: 1rem;
+    }
+
+    @include media-max ($mdBreakpoint) {
+        .cards-area {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @include media-max ($smBreakpoint) {
+        .cards-area {
+            grid-template-columns: 1fr;
+        }
+    }
+}

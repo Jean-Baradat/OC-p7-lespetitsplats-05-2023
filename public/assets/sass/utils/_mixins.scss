@@ -1,12 +1,15 @@
+// this mixin is used to create a global box shadow
 @mixin global-box-shadow {
     box-shadow: 0 7px 12px 3px rgba(0, 0, 0, 0.1);
 }
 
+// this mixin is used to create a global max screen width
 @mixin global-max-screen-width {
-    max-width: 1440px;
+    max-width: 1200px;
     margin: 0 auto;
 }
 
+// this mixin is used to create a media query for a minimum screen width
 @mixin media-min($min-width) {
     @media screen and (min-width: $min-width) {
         & {
@@ -15,6 +18,7 @@
     }
 }
 
+// this mixin is used to create a media query for a maximum screen width
 @mixin media-max($max-width) {
     @media screen and (max-width: $max-width) {
         & {
@@ -23,6 +27,7 @@
     }
 }
 
+// this mixin is used to create a media query for a minimum and maximum screen width
 @mixin media-min-max($min-width, $max-width) {
     @media screen and (min-width: $min-width) and (max-width: $max-width) {
         & {
@@ -31,6 +36,7 @@
     }
 }
 
+// this mixin is used to create an animation with keyframes
 @mixin keyframes($name) {
     @keyframes #{$name} {
         @content;

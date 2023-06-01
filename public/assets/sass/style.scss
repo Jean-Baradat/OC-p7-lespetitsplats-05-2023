@@ -5,5 +5,10 @@
 @import "./base/base";
 @import "./base/fonts";
 
+@import "./components/search-bar";
+@import "./components/tag";
+@import "./components/advanced-search-fields";
+@import "./components/recipe-card";
+
 @import "./layout/header";
 @import "./pages/home";

@@ -1,0 +1,41 @@
+.search-area .advanced-search-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+
+    .advanced-filter-tag {
+        display: flex;
+        background-color: $dodgerBlue;
+        color: #fff;
+        height: 2.5rem;
+        border-radius: 5px;
+        align-items: center;
+        pointer-events: none;
+        transition: box-shadow 0.2s ease;
+
+        &:hover {
+            box-shadow: 0 0 3px 1px #D04F4F;
+        }
+
+        .text {
+            font-size: 14px;
+            font-weight: 700;
+            padding-left: 1rem;
+        }
+
+        .btn-close {
+            margin: 0 1rem;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            color: #fff;
+            transition: color 0.2s ease;
+            pointer-events: auto;
+
+            &:hover {
+                color: $darkCoral;
+            }
+        }
+    }
+}

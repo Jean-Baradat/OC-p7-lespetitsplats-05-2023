@@ -1,0 +1,46 @@
+.search-area .advanced-search {
+    display: flex;
+    margin: 1rem 0;
+    gap: 1rem;
+
+    .advanced-search-field {
+        display: flex;
+        padding: 0 1.5rem;
+        border-radius: 5px;
+        color: #fff;
+        align-items: center;
+        height: 70px;
+        border: none;
+        cursor: pointer;
+
+        .text {
+            font-size: 18px;
+            font-weight: 700;
+            padding-right: 2rem;
+            font-family: $mainFont, sans-serif;
+        }
+    }
+
+    .ingredients {
+        background-color: $dodgerBlue;
+    }
+
+    .machines {
+        background-color: $mediumAquamarine;
+    }
+
+    .tools {
+        background-color: $beanRed;
+    }
+
+    @include media-max ($smBreakpoint) {
+        & {
+            flex-direction: column;
+        }
+
+        .advanced-search-field {
+            width: 100%;
+            justify-content: space-between;
+        }
+    }
+}

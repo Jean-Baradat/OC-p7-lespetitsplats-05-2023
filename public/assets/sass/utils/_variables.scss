@@ -1,5 +1,19 @@
 /* Colors */
+$darkCoral: #D04F4F;
+$mercury: #E7E7E7;
+$dodgerBlue: #3282F7;
+$mediumAquamarine: #68D9A4;
+$beanRed: #ED6454;
 
 /* Fonts */
 $mainFont: 'Lato';
+$secondaryFont: 'DM Sans';
+$thirdFont: 'Roboto';
 $wghtAndStyle: '0,400;0,700;1,400;1,700';
+
+/* Breakpoints */
+$xsBreakpoint: 576px;
+$smBreakpoint: 768px;
+$mdBreakpoint: 1024px;
+$lgBreakpoint: 1290px;
+$xlBreakpoint: 1440px;
