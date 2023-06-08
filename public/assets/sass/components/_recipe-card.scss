@@ -1,15 +1,17 @@
 .cards-area .recipe-card {
+    background-color: $mercury;
+    border-radius: 5px;
+    min-height: 350px;
+
     .heading {
         .recipe-img {
             width: 100%;
             height: 180px;
-            background-color: $mercury;
             border-radius: 5px 5px 0 0;
             display: block;
         }
 
         .content {
-            background-color: $mercury;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -27,15 +29,14 @@
             }
 
             .nb-time {
-                line-height: 0;
                 margin-left: .5rem;
                 font-size: 18px;
+                white-space: nowrap;
             }
         }
     }
 
     .main-content {
-        background-color: $mercury;
         display: flex;
         padding: 0 1rem 1rem 1rem;
         border-radius: 0 0 5px 5px;

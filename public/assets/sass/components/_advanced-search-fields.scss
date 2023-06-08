@@ -12,12 +12,49 @@
         height: 70px;
         border: none;
         cursor: pointer;
+        width: 12rem;
+        min-width: 12rem;
+        justify-content: space-between;
+        transition: width .3s linear;
 
-        .text {
-            font-size: 18px;
-            font-weight: 700;
-            padding-right: 2rem;
-            font-family: $mainFont, sans-serif;
+        .advanced-filter-switch {
+            .text {
+                font-size: 18px;
+                font-weight: 700;
+                font-family: $mainFont, sans-serif;
+            }
+
+            .input {
+                width: 100%;
+                background-color: transparent;
+                height: 2rem;
+                border: none;
+                font-size: 18px;
+                color: #fff;
+                font-weight: 700;
+                font-family: $mainFont, sans-serif;
+            }
+
+            .input::placeholder {
+                color: rgba(255, 255, 255, 0.5);
+            }
+
+            .input:focus {
+                outline: none;
+            }
+        }
+
+        .width-100 {
+            width: 100%;
+        }
+
+        .icon {
+            font-size: 1.3rem;
+            padding-left: 1rem;
+        }
+
+        .hidden {
+            display: none;
         }
     }
 
@@ -42,5 +79,9 @@
             width: 100%;
             justify-content: space-between;
         }
+    }
+
+    .asf-active {
+        width: 100%;
     }
 }

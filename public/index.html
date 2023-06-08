@@ -58,17 +58,38 @@
             <div class="advanced-search">
 
                 <!-- Advanced search fields -->
-                <button class="advanced-search-field ingredients">
-                    <p class="text">Ingrédients</p>
-                    <i class="fa-solid fa-chevron-down fa-lg"></i>
+                <button class="advanced-search-field ingredients" data-field="ingredients">
+                    <div class="advanced-filter-switch">
+                        <input type="text" 
+                            name="input-ingredients" 
+                            id="input-ingredients" 
+                            class="input hidden"
+                            placeholder="Rechercher un ingrédient">
+                        <p class="text">Ingrédients</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down fa-lg icon"></i>
                 </button>
-                <button class="advanced-search-field machines">
-                    <p class="text">Appareils</p>
-                    <i class="fa-solid fa-chevron-down fa-lg"></i>
+                <button class="advanced-search-field machines" data-field="machines">
+                    <div class="advanced-filter-switch">
+                        <input type="text" 
+                            name="input-machines" 
+                            id="input-machines" 
+                            class="input hidden"
+                            placeholder="Rechercher un appareil">
+                        <p class="text">Appareils</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down fa-lg icon"></i>
                 </button>
-                <button class="advanced-search-field tools">
-                    <p class="text">Ustensils</p>
-                    <i class="fa-solid fa-chevron-down fa-lg"></i> 
+                <button class="advanced-search-field tools" data-field="tools">
+                    <div class="advanced-filter-switch">
+                        <input type="text" 
+                            name="input-tools" 
+                            id="input-tools" 
+                            class="input hidden"
+                            placeholder="Rechercher un ustensil">
+                        <p class="text">Ustensils</p>
+                    </div>
+                    <i class="fa-solid fa-chevron-down fa-lg icon"></i> 
                 </button>
                 <!-- End advanced search fields -->
 
@@ -78,56 +99,12 @@
         </section>
 
         <section class="cards-area">
-
-            <!-- Card template -->
-            <article class="recipe-card">
-
-                <!-- Card header -->
-                <header class="heading">
-                    <img src="./assets/img/demo-photo.jpg" alt="Photo de la recette" class="recipe-img">
-                    <div class="content">
-                        <h2 class="title">Limonade de Coco</h2>
-                        <div class="time">
-                            <i class="fa-regular fa-clock fa-lg"></i>
-                            <p class="nb-time">10 min</p>
-                        </div>
-                    </div>
-                </header>
-                <!-- End card header -->
-
-                <!-- Card main content -->
-                <main class="main-content">
-                    <ul class="ingredient-list">
-                        <li class="list-item">
-                            <span class="bold">Lait de coco:</span> 400ml
-                        </li>
-                        <li class="list-item">
-                            <span class="bold">Jus de citron:</span> 2
-                        </li>
-                        <li class="list-item">
-                            <span class="bold">Créme de coco:</span> 4 cuillères
-                        </li>
-                        <li class="list-item">
-                            <span class="bold">Sucre:</span> 20g
-                        </li>
-                        <li class="list-item">
-                            <span class="bold">Glaçons:</span> 2
-                        </li>
-                    </ul>
-
-                    <p class="recipe-summary">
-                        Mettre les glaçons à votre goût dans le blender, ajouter le lait, la crème de coco, le jus de 2 citrons et le sucre. 
-                        Mixer jusqu'à avoir la consistence désirée.
-                    </p>
-                </main>
-                <!-- End card main content -->
-
-            </article>
-            <!-- End card template -->
-
+            <!-- Result card -->
         </section>
 
     </main>
+
+    <script type="module" src="./assets/js/index.js"></script>
 </body>
 
 </html>
