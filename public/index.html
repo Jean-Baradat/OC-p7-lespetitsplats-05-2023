@@ -58,39 +58,60 @@
             <div class="advanced-search">
 
                 <!-- Advanced search fields -->
-                <button class="advanced-search-field ingredients" data-field="ingredients">
-                    <div class="advanced-filter-switch">
-                        <input type="text" 
-                            name="input-ingredients" 
-                            id="input-ingredients" 
-                            class="input hidden"
-                            placeholder="Rechercher un ingrédient">
-                        <p class="text">Ingrédients</p>
+                <div class="advanced-search-field ingredients" data-field="ingredients">
+                    <div class="search-area">
+                        <div class="advanced-filter-switch">
+                            <input type="text" 
+                                name="input-ingredients" 
+                                id="input-ingredients" 
+                                class="input hidden"
+                                placeholder="Rechercher un ingrédient">
+                            <p class="text">Ingrédients</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-down fa-lg icon"></i>
                     </div>
-                    <i class="fa-solid fa-chevron-down fa-lg icon"></i>
-                </button>
-                <button class="advanced-search-field machines" data-field="machines">
-                    <div class="advanced-filter-switch">
-                        <input type="text" 
-                            name="input-machines" 
-                            id="input-machines" 
-                            class="input hidden"
-                            placeholder="Rechercher un appareil">
-                        <p class="text">Appareils</p>
+                    <div class="result-area ingredients">
+                        <div class="result-content hidden">
+                            <!-- Result list ingredients -->
+                        </div>
                     </div>
-                    <i class="fa-solid fa-chevron-down fa-lg icon"></i>
-                </button>
-                <button class="advanced-search-field tools" data-field="tools">
-                    <div class="advanced-filter-switch">
-                        <input type="text" 
-                            name="input-tools" 
-                            id="input-tools" 
-                            class="input hidden"
-                            placeholder="Rechercher un ustensil">
-                        <p class="text">Ustensils</p>
+                </div>
+                <div class="advanced-search-field machines" data-field="machines">
+                    <div class="search-area">
+                        <div class="advanced-filter-switch">
+                            <input type="text" 
+                                name="input-machines" 
+                                id="input-machines" 
+                                class="input hidden"
+                                placeholder="Rechercher un appareil">
+                            <p class="text">Appareils</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-down fa-lg icon"></i> 
                     </div>
-                    <i class="fa-solid fa-chevron-down fa-lg icon"></i> 
-                </button>
+                    <div class="result-area machines">
+                        <div class="result-content hidden">
+                            <!-- Result list machines -->
+                        </div>
+                    </div>
+                </div>
+                <div class="advanced-search-field tools" data-field="tools">
+                    <div class="search-area">
+                        <div class="advanced-filter-switch">
+                            <input type="text" 
+                                name="input-tools" 
+                                id="input-tools" 
+                                class="input hidden"
+                                placeholder="Rechercher un ustensil">
+                            <p class="text">Ustensils</p>
+                        </div>
+                        <i class="fa-solid fa-chevron-down fa-lg icon"></i> 
+                    </div>
+                    <div class="result-area tools">
+                        <div class="result-content hidden">
+                            <!-- Result list tools -->
+                        </div>
+                    </div>
+                </div>
                 <!-- End advanced search fields -->
 
             </div>

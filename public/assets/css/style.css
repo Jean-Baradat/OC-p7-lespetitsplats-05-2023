@@ -1,8 +1,28 @@
+/**
+ * Helpers classes
+ */
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=DM Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
+.full-width-center {
+  width: 100% !important;
+  text-align: center !important;
+}
+
+.bold {
+  font-weight: bold !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.width-100 {
+  width: 100% !important;
+}
+
 /* Colors */
 /* Fonts */
 /* Breakpoints */
 /* Global */
-@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400;1,700&family=DM Sans:ital,wght@0,400;0,700;1,400;1,700&family=Roboto:ital,wght@0,400;0,700;1,400;1,700&display=swap");
 *,
 *:after,
 *:before {
@@ -53,16 +73,6 @@ a {
   outline: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
   -webkit-focus-ring-color: rgba(0, 0, 0, 0);
-}
-
-/* GENERAL CLASS */
-.full-width-center {
-  width: 100%;
-  text-align: center;
-}
-
-.bold {
-  font-weight: bold;
 }
 
 .search-area .search-bar {
@@ -141,18 +151,74 @@ a {
   gap: 1rem;
 }
 .search-area .advanced-search .advanced-search-field {
-  display: flex;
-  padding: 0 1.5rem;
+  position: relative;
   border-radius: 5px;
-  color: #fff;
-  align-items: center;
-  height: 70px;
-  border: none;
-  cursor: pointer;
   width: 12rem;
   min-width: 12rem;
+  transition: width 0.3s linear, border-radius 0.3s linear 0.2s;
+}
+.search-area .advanced-search .advanced-search-field.active {
+  width: 100% !important;
+  border-radius: 5px 5px 0 0;
+  transition: width 0.3s linear, border-radius 0.01s linear;
+}
+.search-area .advanced-search .advanced-search-field .search-area {
+  cursor: pointer;
+  display: flex;
   justify-content: space-between;
-  transition: width 0.3s linear;
+  align-items: center;
+  padding: 0 1.5rem;
+  color: #fff;
+  height: 70px;
+}
+.search-area .advanced-search .advanced-search-field .result-area {
+  position: absolute;
+  top: 70px;
+  height: 0;
+  left: 0;
+  width: 100%;
+  transition: height 0.3s ease-out;
+  border-radius: 0 0 5px 5px;
+  z-index: 1;
+  overflow-y: auto;
+}
+.search-area .advanced-search .advanced-search-field .result-area::-webkit-scrollbar {
+  width: 10px;
+}
+.search-area .advanced-search .advanced-search-field .result-area::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+.search-area .advanced-search .advanced-search-field .result-area::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 5px;
+}
+.search-area .advanced-search .advanced-search-field .result-area::-webkit-scrollbar-thumb:hover {
+  background: rgb(255, 255, 255);
+}
+.search-area .advanced-search .advanced-search-field .result-area .result-content {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.1rem;
+  padding: 0.5rem 1rem;
+}
+.search-area .advanced-search .advanced-search-field .result-area .result-content .result-item {
+  color: #fff;
+  font-size: 18px;
+  padding: 0.5rem;
+  border-radius: 5px;
+}
+.search-area .advanced-search .advanced-search-field .result-area .result-content .result-item:hover {
+  cursor: pointer;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.search-area .advanced-search .advanced-search-field .result-area.active {
+  height: 20rem;
+}
+.search-area .advanced-search .advanced-search-field .icon {
+  font-size: 1.3rem;
+  padding-left: 1rem;
 }
 .search-area .advanced-search .advanced-search-field .advanced-filter-switch .text {
   font-size: 18px;
@@ -175,16 +241,6 @@ a {
 .search-area .advanced-search .advanced-search-field .advanced-filter-switch .input:focus {
   outline: none;
 }
-.search-area .advanced-search .advanced-search-field .width-100 {
-  width: 100%;
-}
-.search-area .advanced-search .advanced-search-field .icon {
-  font-size: 1.3rem;
-  padding-left: 1rem;
-}
-.search-area .advanced-search .advanced-search-field .hidden {
-  display: none;
-}
 .search-area .advanced-search .ingredients {
   background-color: #3282F7;
 }
@@ -202,9 +258,6 @@ a {
     width: 100%;
     justify-content: space-between;
   }
-}
-.search-area .advanced-search .asf-active {
-  width: 100%;
 }
 
 .cards-area .recipe-card {

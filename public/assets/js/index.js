@@ -3,13 +3,20 @@ import getData from "./api/Api.js";
 window.addEventListener("load", () => {
     // DOM ---------------------------------------------------------------------
     let cardsArea = document.querySelector(".cards-area");
+    let ASFsearchArea = document.querySelectorAll(".advanced-search-field .search-area");
     let advancedSearchFields = document.querySelectorAll(".advanced-search-field");
+    let ASFingredientsResultContent = document.querySelector(".result-area.ingredients .result-content");
+    let ASFmachinesResultContent = document.querySelector(".result-area.machines .result-content");
+    let ASFtoolsResultContent = document.querySelector(".result-area.tools .result-content");
 
     // VARIABLES ---------------------------------------------------------------
     let DATA_URL = "./../../../../data/recipes.js";
+    let listOfIngredients = [];
+    let listOfMachines = [];
+    let listOfTools = [];
 
     // EVENTS ------------------------------------------------------------------
-    advancedSearchFields.forEach((advancedSearchField) => {
+    ASFsearchArea.forEach((advancedSearchField) => {
         advancedSearchField.addEventListener("click", (e) => ASFevent(e));
     });
 
@@ -18,7 +25,65 @@ window.addEventListener("load", () => {
         .then(recipes => {
             recipes.forEach(recipe => {
 
-                let ingredientsList = recipe.ingredients.map(ingredient => {
+                // ---------------------------------------------------------------
+                recipe.ingredients.map(ingredient => {
+                    let ingredientName = ingredient.ingredient.toLowerCase();
+
+                    if (!listOfIngredients.includes(ingredientName)) {
+                        listOfIngredients.push(ingredientName);
+                    }
+                });
+
+                ASFingredientsResultContent.innerHTML = `
+                ${listOfIngredients.map(ingredient => {
+                    return `
+                    <div class="result-item">
+                        <span>${ingredient}</span>
+                    </div>
+                    `;
+                }).join("")}
+                `;
+                // ---------------------------------------------------------------
+
+                // ---------------------------------------------------------------
+                let applianceName = recipe.appliance.toLowerCase();
+                if (!listOfMachines.includes(applianceName)) {
+                    listOfMachines.push(applianceName);
+                }
+
+                ASFmachinesResultContent.innerHTML = `
+                ${listOfMachines.map(machine => {
+                    return `
+                    <div class="result-item">
+                        <span>${machine}</span>
+                    </div>
+                    `;
+                }).join("")}
+                `;
+                // ---------------------------------------------------------------
+
+                // ---------------------------------------------------------------
+                recipe.ustensils.map(tool => {
+                    let toolName = tool.toLowerCase();
+
+                    if (!listOfTools.includes(toolName)) {
+                        listOfTools.push(toolName);
+                    }
+                });
+
+                ASFtoolsResultContent.innerHTML = `
+                ${listOfTools.map(tool => {
+                    return `
+                    <div class="result-item">
+                        <span>${tool}</span>
+                    </div>
+                    `;
+                }).join("")}
+                `;
+                // ---------------------------------------------------------------
+
+
+                let ingredientsHtmlList = recipe.ingredients.map(ingredient => {
                     if (ingredient.quantity === undefined && ingredient.unit === undefined) {
                         return `
                         <li class="list-item">
@@ -53,7 +118,7 @@ window.addEventListener("load", () => {
                     <!-- Card main content -->
                     <main class="main-content">
                         <ul class="ingredient-list">
-                            ${ingredientsList.join("")}
+                            ${ingredientsHtmlList.join("")}
                         </ul>
 
                         <p class="recipe-summary">
@@ -65,6 +130,10 @@ window.addEventListener("load", () => {
                 </article>
                 `;
             });
+
+            console.log(listOfIngredients);
+            console.log(listOfMachines);
+            console.log(listOfTools);
         })
         .catch(err => {
             console.log(err);
@@ -108,54 +177,42 @@ window.addEventListener("load", () => {
                 ASFswitchToggle(advancedSearchField, false);
             }
         });
-
-
-        // switch (clickedElement.dataset.field) {
-        //     case "ingredients":
-        //         console.log("ingredients");
-        //         clickedElement.classList.toggle("asf-active");
-
-        //         break;
-        //     case "machines":
-        //         console.log("machines");
-        //         clickedElement.classList.toggle("asf-active");
-
-        //         break;
-        //     case "tools":
-        //         console.log("tools");
-        //         clickedElement.classList.toggle("asf-active");
-
-        //         break;
-        //     default:
-        //         console.log("default");
-        //         break;
-        // }
     };
 
+
+    /**
+     * 
+     * @param {*} ASF 
+     * @param {*} isASFClicked 
+     */
     const ASFswitchToggle = (ASF, isASFClicked) => {
         if (isASFClicked) {
-            // toggle active class on clicked advancedSearchField
-            ASF.classList.toggle("asf-active");
-            // switch chevron icon on clicked advancedSearchField
+            ASF.classList.toggle("active");
+            // ---------------------------------------------------------------
             ASF.querySelector("i").classList.toggle("fa-chevron-down");
             ASF.querySelector("i").classList.toggle("fa-chevron-up");
-            // switch hidden class on clicked advancedSearchField content
+            // ---------------------------------------------------------------
             ASF.querySelector("p").classList.toggle("hidden");
             ASF.querySelector("input").classList.toggle("hidden");
-            // toggle width-100 class on clicked advancedSearchField content
+            // ---------------------------------------------------------------
             ASF.querySelector(".advanced-filter-switch").classList.toggle("width-100");
+            // ---------------------------------------------------------------
+            ASF.querySelector(".result-area").classList.toggle("active");
+            ASF.querySelector(".result-area .result-content").classList.toggle("hidden");
         } else {
-            // remove active class on sibling advancedSearchField
-            ASF.classList.remove("asf-active");
-            // reset to default chevron icon on sibling advancedSearchField
+            // ---------------------------------------------------------------
+            ASF.classList.remove("active");
+            // ---------------------------------------------------------------
             ASF.querySelector("i").classList.add("fa-chevron-down");
             ASF.querySelector("i").classList.remove("fa-chevron-up");
-            // reset to default content on sibling advancedSearchField
+            // ---------------------------------------------------------------
             ASF.querySelector("p").classList.remove("hidden");
             ASF.querySelector("input").classList.add("hidden");
-            // reset to default width-100 class on sibling advancedSearchField content
+            // ---------------------------------------------------------------
             ASF.querySelector(".advanced-filter-switch").classList.remove("width-100");
-
+            // ---------------------------------------------------------------
+            ASF.querySelector(".result-area").classList.remove("active");
+            ASF.querySelector(".result-area .result-content").classList.add("hidden");
         }
     }
 

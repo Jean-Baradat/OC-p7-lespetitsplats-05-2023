@@ -4,18 +4,86 @@
     gap: 1rem;
 
     .advanced-search-field {
-        display: flex;
-        padding: 0 1.5rem;
+        position: relative;
         border-radius: 5px;
-        color: #fff;
-        align-items: center;
-        height: 70px;
-        border: none;
-        cursor: pointer;
         width: 12rem;
         min-width: 12rem;
-        justify-content: space-between;
-        transition: width .3s linear;
+        transition: width .3s linear, border-radius .3s linear 0.2s;
+
+        &.active {
+            width: 100% !important;
+            border-radius: 5px 5px 0 0;
+            transition: width .3s linear, border-radius .01s linear;
+        }
+        
+        .search-area {
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1.5rem;
+            color: #fff;
+            height: 70px;
+        }
+
+        .result-area {
+            position: absolute;
+            top: 70px;
+            height: 0;
+            left: 0;
+            width: 100%;
+            transition: height .3s ease-out;
+            border-radius: 0 0 5px 5px;
+            z-index: 1;
+            overflow-y: auto;
+
+            &::-webkit-scrollbar {
+                width: 10px;
+            }
+              
+            &::-webkit-scrollbar-track {
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 5px;
+            }
+            
+            &::-webkit-scrollbar-thumb {
+                background: rgba(255, 255, 255, 0.8);
+                border-radius: 5px;
+            }
+            
+            &::-webkit-scrollbar-thumb:hover {
+                background: rgba(255, 255, 255, 1);
+            }
+        }
+
+        .result-area .result-content {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.1rem;
+            padding: 0.5rem 1rem;
+
+            .result-item {
+                color: #fff;
+                font-size: 18px;
+                padding: 0.5rem;
+                border-radius: 5px;
+
+                &:hover {
+                    cursor: pointer;
+                    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+        }
+
+        .result-area.active {
+            height: 20rem;
+        }
+
+        .icon {
+            font-size: 1.3rem;
+            padding-left: 1rem;
+        }
 
         .advanced-filter-switch {
             .text {
@@ -43,19 +111,6 @@
                 outline: none;
             }
         }
-
-        .width-100 {
-            width: 100%;
-        }
-
-        .icon {
-            font-size: 1.3rem;
-            padding-left: 1rem;
-        }
-
-        .hidden {
-            display: none;
-        }
     }
 
     .ingredients {
@@ -79,9 +134,5 @@
             width: 100%;
             justify-content: space-between;
         }
-    }
-
-    .asf-active {
-        width: 100%;
     }
 }
