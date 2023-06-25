@@ -3,7 +3,6 @@ import Utils from "../utils/utils.js";
 
 const AllTemplate = {
     ListOfFilter: DataPreparation.listsOfAdvancedFilter(),
-    listOfRecipes: DataPreparation.listOfRecipes(),
 
     advancedFilterHTML() {
         let result = {};
@@ -21,10 +20,11 @@ const AllTemplate = {
         return Utils.minifyHTMLInArray(result, this.ListOfFilter);
     },
 
-    recipesHTML() {
+    recipesHTML(searchValue = "") {
         let cards = "";
+        let listOfRecipes = DataPreparation.listOfRecipes(searchValue);
 
-        this.listOfRecipes.forEach(recipe => {
+        listOfRecipes.forEach(recipe => {
             let ingredientsHtmlList = recipe.ingredients.map(ingredient => {
                 if (ingredient.quantity === undefined && ingredient.unit === undefined) {
                     return `

@@ -8,25 +8,33 @@ window.addEventListener("load", () => {
     let ASFingredientsResultContent = document.querySelector(".result-area.ingredients .result-content");
     let ASFmachinesResultContent = document.querySelector(".result-area.machines .result-content");
     let ASFtoolsResultContent = document.querySelector(".result-area.tools .result-content");
+    let searchInput = document.querySelector(".search-input");
 
     // VARIABLES ---------------------------------------------------------------
-
+    let searchValue = "";
 
     // EVENTS ------------------------------------------------------------------
     ASFsearchArea.forEach((advancedSearchField) => {
         advancedSearchField.addEventListener("click", (e) => ASFevent(e));
     });
 
+    searchInput.addEventListener("input", (e) => {
+        searchValue = e.target.value.toLowerCase();
+        if (searchValue.length >= 3) {
+            cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue);
+        } else {
+            cardsArea.innerHTML = AllTemplate.recipesHTML();
+        }
+    });
 
-    // API ---------------------------------------------------------------------
+    // INIT --------------------------------------------------------------------
     ASFingredientsResultContent.innerHTML = AllTemplate.advancedFilterHTML()["listOfIngredients"];
     ASFmachinesResultContent.innerHTML = AllTemplate.advancedFilterHTML()["listOfMachines"];
     ASFtoolsResultContent.innerHTML = AllTemplate.advancedFilterHTML()["listOfTools"];
     cardsArea.innerHTML = AllTemplate.recipesHTML();
 
 
-    // FONCTIONS -----------------------------------------------------------
-
+    // FONCTIONS ---------------------------------------------------------------
     /**
      * 
      * @param {*} e 

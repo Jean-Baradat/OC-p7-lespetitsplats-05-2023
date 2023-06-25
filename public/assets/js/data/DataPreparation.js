@@ -41,11 +41,30 @@ const DataPreparation = {
     },
 
 
-    listOfRecipes() {
+    listOfRecipes(searchValue) {
         let listOfRecipes = [];
 
         this.recipes.forEach(recipe => {
-            listOfRecipes.push(recipe);
+            // Search in the name of the recipe
+            if (recipe.name.toLowerCase().includes(searchValue)) {
+                if (!listOfRecipes.includes(recipe)) {
+                    listOfRecipes.push(recipe);
+                }
+            }
+            // Search in the ingredients of the recipe
+            recipe.ingredients.forEach(ingredient => {
+                if (ingredient.ingredient.toLowerCase().includes(searchValue)) {
+                    if (!listOfRecipes.includes(recipe)) {
+                        listOfRecipes.push(recipe);
+                    }
+                }
+            });
+            // Search in the description of the recipe
+            if (recipe.description.toLowerCase().includes(searchValue)) {
+                if (!listOfRecipes.includes(recipe)) {
+                    listOfRecipes.push(recipe);
+                }
+            }
         });
 
         return listOfRecipes;
