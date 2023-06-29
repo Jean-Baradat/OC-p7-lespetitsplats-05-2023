@@ -46,17 +46,18 @@ const DataPreparation = {
      * @returns {Array} - An array of recipe objects that match the search value.
      */
     listOfRecipes(searchValue) {
-        let listOfRecipes = [];
 
-        for (const recipe of this.recipes) {
-            if (this.searchRecipeName(recipe, searchValue) ||
-                this.searchRecipeIngredients(recipe, searchValue) ||
-                this.searchRecipeDescription(recipe, searchValue)) {
-                listOfRecipes.push(recipe);
-            }
-        };
+        const recipesByName = this.recipes.filter((item) => {
+            return this.searchRecipeName(item, searchValue)
+        });
+        const recipesByIngredients = this.recipes.filter((item) => {
+            return this.searchRecipeIngredients(item, searchValue)
+        });
+        const recipesByDescription = this.recipes.filter((item) => {
+            return this.searchRecipeDescription(item, searchValue)
+        });
 
-        return listOfRecipes;
+        return [...new Set([].concat(recipesByName, recipesByIngredients, recipesByDescription))];
     },
 
     /**
