@@ -12,6 +12,27 @@ window.addEventListener("load", () => {
 
     // VARIABLES ---------------------------------------------------------------
     let searchValue = "";
+    let listOfAdvancedFilter = [
+        {
+            "DOM": ASFingredientsResultContent,
+            "type": "listOfIngredients"
+        },
+        {
+            "DOM": ASFmachinesResultContent,
+            "type": "listOfMachines"
+        },
+        {
+            "DOM": ASFtoolsResultContent,
+            "type": "listOfTools"
+        }
+    ];
+
+    // DOM FUNCTIONS -----------------------------------------------------------
+    const ASFinnerHTML = (listOfAF, isInit) => {
+        listOfAF.forEach(advancedFilter => {
+            advancedFilter.DOM.innerHTML = AllTemplate.advancedFilterHTML(isInit)[advancedFilter.type];
+        });
+    };
 
     // EVENTS ------------------------------------------------------------------
     ASFsearchArea.forEach((advancedSearchField) => {
@@ -22,17 +43,16 @@ window.addEventListener("load", () => {
         searchValue = e.target.value.toLowerCase();
         if (searchValue.length >= 3) {
             cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue);
+            ASFinnerHTML(listOfAdvancedFilter, false);
         } else {
             cardsArea.innerHTML = AllTemplate.recipesHTML();
+            ASFinnerHTML(listOfAdvancedFilter, false);
         }
     });
 
     // INIT --------------------------------------------------------------------
-    ASFingredientsResultContent.innerHTML = AllTemplate.advancedFilterHTML()["listOfIngredients"];
-    ASFmachinesResultContent.innerHTML = AllTemplate.advancedFilterHTML()["listOfMachines"];
-    ASFtoolsResultContent.innerHTML = AllTemplate.advancedFilterHTML()["listOfTools"];
     cardsArea.innerHTML = AllTemplate.recipesHTML();
-
+    ASFinnerHTML(listOfAdvancedFilter, true);
 
     // FONCTIONS ---------------------------------------------------------------
     /**

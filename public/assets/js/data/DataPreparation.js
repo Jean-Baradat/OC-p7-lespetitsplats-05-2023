@@ -6,9 +6,18 @@ const DataPreparation = {
     listOfIngredients: [],
     listOfMachines: [],
     listOfTools: [],
+    listOfRecipes: [],
 
-    listsOfAdvancedFilter() {
-        this.recipes.forEach(recipe => {
+    listsOfAdvancedFilter(isInit) {
+        this.listOfIngredients = [];
+        this.listOfMachines = [];
+        this.listOfTools = [];
+
+        if (isInit) {
+            this.listOfRecipes = this.recipes;
+        }
+
+        this.listOfRecipes.forEach(recipe => {
 
             recipe.ingredients.map(ingredient => {
                 let ingredientName = ingredient.ingredient.toLowerCase();
@@ -45,18 +54,18 @@ const DataPreparation = {
      * @param {string} searchValue - The value to search for in the recipe name, ingredients, and description.
      * @returns {Array} - An array of recipe objects that match the search value.
      */
-    listOfRecipes(searchValue) {
-        let listOfRecipes = [];
+    handleListOfRecipes(searchValue) {
+        this.listOfRecipes = [];
 
         for (const recipe of this.recipes) {
             if (this.searchRecipeName(recipe, searchValue) ||
                 this.searchRecipeIngredients(recipe, searchValue) ||
                 this.searchRecipeDescription(recipe, searchValue)) {
-                listOfRecipes.push(recipe);
+                this.listOfRecipes.push(recipe);
             }
         };
 
-        return listOfRecipes;
+        return this.listOfRecipes;
     },
 
     /**

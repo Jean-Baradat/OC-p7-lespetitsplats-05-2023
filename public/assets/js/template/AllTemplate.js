@@ -2,13 +2,13 @@ import DataPreparation from "../data/DataPreparation.js";
 import Utils from "../utils/utils.js";
 
 const AllTemplate = {
-    ListOfFilter: DataPreparation.listsOfAdvancedFilter(),
 
-    advancedFilterHTML() {
+    advancedFilterHTML(isInit) {
         let result = {};
+        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit)
 
-        Object.keys(this.ListOfFilter).forEach(key => {
-            result[key] = this.ListOfFilter[key].map(e => {
+        Object.keys(ListOfFilter).forEach(key => {
+            result[key] = ListOfFilter[key].map(e => {
                 return `
                     <div class="result-item">
                         <span>${e}</span>
@@ -17,12 +17,12 @@ const AllTemplate = {
             }).join("");
         });
 
-        return Utils.minifyHTMLInArray(result, this.ListOfFilter);
+        return Utils.minifyHTMLInArray(result, ListOfFilter);
     },
 
     recipesHTML(searchValue = "") {
         let cards = "";
-        let listOfRecipes = DataPreparation.listOfRecipes(searchValue);
+        let listOfRecipes = DataPreparation.handleListOfRecipes(searchValue);
 
         listOfRecipes.forEach(recipe => {
             let ingredientsHtmlList = recipe.ingredients.map(ingredient => {
