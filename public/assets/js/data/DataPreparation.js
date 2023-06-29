@@ -48,13 +48,13 @@ const DataPreparation = {
     listOfRecipes(searchValue) {
         let listOfRecipes = [];
 
-        this.recipes.forEach(recipe => {
+        for (const recipe of this.recipes) {
             if (this.searchRecipeName(recipe, searchValue) ||
                 this.searchRecipeIngredients(recipe, searchValue) ||
                 this.searchRecipeDescription(recipe, searchValue)) {
                 listOfRecipes.push(recipe);
             }
-        });
+        };
 
         return listOfRecipes;
     },
@@ -76,13 +76,12 @@ const DataPreparation = {
      * @returns {boolean} - True if the recipe contains an ingredient that includes the search value, false otherwise.
      */
     searchRecipeIngredients(recipe, searchValue) {
-        let found = false;
-        recipe.ingredients.forEach(ingredient => {
+        for (const ingredient of recipe.ingredients) {
             if (ingredient.ingredient.toLowerCase().includes(searchValue)) {
-                found = true;
+                return true;
             }
-        });
-        return found;
+        }
+        return false;
     },
 
     /**
