@@ -40,36 +40,60 @@ const DataPreparation = {
         };
     },
 
-
+    /**
+     * Returns a list of recipes that match the search value.
+     * @param {string} searchValue - The value to search for in the recipe name, ingredients, and description.
+     * @returns {Array} - An array of recipe objects that match the search value.
+     */
     listOfRecipes(searchValue) {
         let listOfRecipes = [];
 
         this.recipes.forEach(recipe => {
-            // Search in the name of the recipe
-            if (recipe.name.toLowerCase().includes(searchValue)) {
-                if (!listOfRecipes.includes(recipe)) {
-                    listOfRecipes.push(recipe);
-                }
-            }
-            // Search in the ingredients of the recipe
-            recipe.ingredients.forEach(ingredient => {
-                if (ingredient.ingredient.toLowerCase().includes(searchValue)) {
-                    if (!listOfRecipes.includes(recipe)) {
-                        listOfRecipes.push(recipe);
-                    }
-                }
-            });
-            // Search in the description of the recipe
-            if (recipe.description.toLowerCase().includes(searchValue)) {
-                if (!listOfRecipes.includes(recipe)) {
-                    listOfRecipes.push(recipe);
-                }
+            if (this.searchRecipeName(recipe, searchValue) ||
+                this.searchRecipeIngredients(recipe, searchValue) ||
+                this.searchRecipeDescription(recipe, searchValue)) {
+                listOfRecipes.push(recipe);
             }
         });
 
         return listOfRecipes;
-    }
+    },
 
+    /**
+     * Returns true if the recipe name includes the search value.
+     * @param {Object} recipe - The recipe object to search.
+     * @param {string} searchValue - The value to search for in the recipe name.
+     * @returns {boolean} - True if the recipe name includes the search value, false otherwise.
+     */
+    searchRecipeName(recipe, searchValue) {
+        return recipe.name.toLowerCase().includes(searchValue);
+    },
+
+    /**
+     * Returns true if the recipe contains an ingredient that includes the search value.
+     * @param {Object} recipe - The recipe object to search.
+     * @param {string} searchValue - The value to search for in the recipe ingredients.
+     * @returns {boolean} - True if the recipe contains an ingredient that includes the search value, false otherwise.
+     */
+    searchRecipeIngredients(recipe, searchValue) {
+        let found = false;
+        recipe.ingredients.forEach(ingredient => {
+            if (ingredient.ingredient.toLowerCase().includes(searchValue)) {
+                found = true;
+            }
+        });
+        return found;
+    },
+
+    /**
+     * Returns true if the recipe description includes the search value.
+     * @param {Object} recipe - The recipe object to search.
+     * @param {string} searchValue - The value to search for in the recipe description.
+     * @returns {boolean} - True if the recipe description includes the search value, false otherwise.
+     */
+    searchRecipeDescription(recipe, searchValue) {
+        return recipe.description.toLowerCase().includes(searchValue);
+    },
 }
 
 export default DataPreparation;
