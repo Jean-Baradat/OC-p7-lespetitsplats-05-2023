@@ -8,7 +8,7 @@ const DataPreparation = {
     listOfTools: [],
     listOfRecipes: [],
 
-    listsOfAdvancedFilter(isInit) {
+    listsOfAdvancedFilter(isInit, ASFValues) {
         this.listOfIngredients = [];
         this.listOfMachines = [];
         this.listOfTools = [];
@@ -22,14 +22,14 @@ const DataPreparation = {
             recipe.ingredients.map(ingredient => {
                 let ingredientName = ingredient.ingredient.toLowerCase();
 
-                if (!this.listOfIngredients.includes(ingredientName)) {
+                if (!this.listOfIngredients.includes(ingredientName) && ingredientName.includes(ASFValues.ingredient)) {
                     this.listOfIngredients.push(ingredientName);
                 }
             });
 
             // ---------------------------------------------------------------
             let applianceName = recipe.appliance.toLowerCase();
-            if (!this.listOfMachines.includes(applianceName)) {
+            if (!this.listOfMachines.includes(applianceName) && applianceName.includes(ASFValues.machine)) {
                 this.listOfMachines.push(applianceName);
             }
 
@@ -37,7 +37,7 @@ const DataPreparation = {
             recipe.ustensils.map(tool => {
                 let toolName = tool.toLowerCase();
 
-                if (!this.listOfTools.includes(toolName)) {
+                if (!this.listOfTools.includes(toolName) && toolName.includes(ASFValues.tool)) {
                     this.listOfTools.push(toolName);
                 }
             });

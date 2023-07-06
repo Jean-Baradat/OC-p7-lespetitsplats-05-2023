@@ -9,9 +9,17 @@ window.addEventListener("load", () => {
     let ASFmachinesResultContent = document.querySelector(".result-area.machines .result-content");
     let ASFtoolsResultContent = document.querySelector(".result-area.tools .result-content");
     let searchInput = document.querySelector(".search-input");
+    let inputIngredients = document.getElementById("input-ingredients");
+    let inputMachines = document.getElementById("input-machines");
+    let inputTools = document.getElementById("input-tools");
 
     // VARIABLES ---------------------------------------------------------------
     let searchValue = "";
+    let ASFValues = {
+        "ingredient": "",
+        "machine": "",
+        "tool": ""
+    };
     let listOfAdvancedFilter = [
         {
             "DOM": ASFingredientsResultContent,
@@ -28,9 +36,13 @@ window.addEventListener("load", () => {
     ];
 
     // DOM FUNCTIONS -----------------------------------------------------------
-    const ASFinnerHTML = (listOfAF, isInit) => {
+    const ASFinnerHTML = (listOfAF, isInit, searchValue = null, type = null) => {
+        if (searchValue !== null && type !== null) {
+            ASFValues[type] = searchValue;
+        }
+
         listOfAF.forEach(advancedFilter => {
-            advancedFilter.DOM.innerHTML = AllTemplate.advancedFilterHTML(isInit)[advancedFilter.type];
+            advancedFilter.DOM.innerHTML = AllTemplate.advancedFilterHTML(isInit, ASFValues)[advancedFilter.type];
         });
     };
 
@@ -48,6 +60,18 @@ window.addEventListener("load", () => {
             cardsArea.innerHTML = AllTemplate.recipesHTML();
             ASFinnerHTML(listOfAdvancedFilter, false);
         }
+    });
+
+    inputIngredients.addEventListener("input", (e) => {
+        ASFinnerHTML(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "ingredient");
+    });
+
+    inputMachines.addEventListener("input", (e) => {
+        ASFinnerHTML(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "machine");
+    });
+
+    inputTools.addEventListener("input", (e) => {
+        ASFinnerHTML(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "tool");
     });
 
     // INIT --------------------------------------------------------------------

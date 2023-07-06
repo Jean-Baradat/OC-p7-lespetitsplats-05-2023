@@ -3,9 +3,9 @@ import Utils from "../utils/utils.js";
 
 const AllTemplate = {
 
-    advancedFilterHTML(isInit) {
+    advancedFilterHTML(isInit, ASFValues) {
         let result = {};
-        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit);
+        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit, ASFValues);
 
         for (const [key, value] of Object.entries(ListOfFilter)) {
             if (value.length != 0) {
