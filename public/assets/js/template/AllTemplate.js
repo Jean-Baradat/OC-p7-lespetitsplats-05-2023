@@ -11,7 +11,7 @@ const AllTemplate = {
             result[key] = ListOfFilter[key].map(e => {
                 return `
                     <div class="result-item">
-                        <span>${e}</span>
+                        <span>${e.charAt(0).toUpperCase() + e.slice(1)}</span>
                     </div>
                 `;
             }).join("");
