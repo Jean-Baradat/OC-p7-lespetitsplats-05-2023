@@ -5,24 +5,42 @@ const AllTemplate = {
 
     advancedFilterHTML(isInit) {
         let result = {};
-        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit)
+        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit);
 
-        Object.keys(ListOfFilter).forEach(key => {
-            result[key] = ListOfFilter[key].map(e => {
-                return `
-                    <div class="result-item">
-                        <span>${e.charAt(0).toUpperCase() + e.slice(1)}</span>
+        for (const [key, value] of Object.entries(ListOfFilter)) {
+            if (value.length != 0) {
+                result[key] = value.map(e => {
+                    return `
+                        <div class="result-item">
+                            <span>${e.charAt(0).toUpperCase() + e.slice(1)}</span>
+                        </div>
+                    `;
+                }).join("");
+            } else {
+                result[key] = `
+                    <div class="result-item-empty">
+                        <span>Aucun résultat</span>
                     </div>
                 `;
-            }).join("");
-        });
+            }
+        }
 
-        return Utils.minifyHTMLInArray(result, ListOfFilter);
+        return Utils.minifyHTMLInArray(result, Object.keys(ListOfFilter));
     },
 
     recipesHTML(searchValue = "") {
         let cards = "";
         let listOfRecipes = DataPreparation.handleListOfRecipes(searchValue);
+
+        if (listOfRecipes.length === 0) {
+            cards = `
+            <div class="no-result">
+                <p>
+                    Aucune recette ne correspond à votre critère « ${searchValue} » vous pouvez chercher « tarte aux pommes », « poisson », etc.
+                </p>
+            </div>
+            `;
+        }
 
         listOfRecipes.forEach(recipe => {
             let ingredientsHtmlList = recipe.ingredients.map(ingredient => {

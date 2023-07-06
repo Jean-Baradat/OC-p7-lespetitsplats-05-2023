@@ -213,6 +213,17 @@ a {
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.1);
 }
+.search-area .advanced-search .advanced-search-field .result-area .result-content .result-item-empty {
+  grid-column: 1/-1;
+  text-align: center;
+  color: rgba(255, 255, 255, 0.5);
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+}
 .search-area .advanced-search .advanced-search-field .result-area.active {
   height: 20rem;
 }
@@ -258,6 +269,17 @@ a {
     width: 100%;
     justify-content: space-between;
   }
+}
+
+.cards-area .no-result {
+  grid-column: 1/-1;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.5);
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.3rem;
 }
 
 .cards-area .recipe-card {

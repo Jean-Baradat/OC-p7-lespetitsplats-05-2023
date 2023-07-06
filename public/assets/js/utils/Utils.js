@@ -1,9 +1,9 @@
 const Utils = {
 
-    minifyHTMLInArray(e, ListOfFilter) {
+    minifyHTMLInArray(e, filterListKey) {
         let result = {};
 
-        Object.keys(ListOfFilter).forEach(key => {
+        filterListKey.forEach(key => {
             result[key] = e[key].replace(/\s+/g, ' ').trim();
         });
 

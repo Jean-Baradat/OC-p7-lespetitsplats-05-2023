@@ -1,3 +1,14 @@
+.cards-area .no-result {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: rgba(0, 0, 0, 0.5);
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+}
+
 .cards-area .recipe-card {
     background-color: $mercury;
     border-radius: 5px;
