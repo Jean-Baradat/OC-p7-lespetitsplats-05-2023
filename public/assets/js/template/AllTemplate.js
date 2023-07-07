@@ -11,7 +11,7 @@ const AllTemplate = {
             if (value.length != 0) {
                 result[key] = value.map(e => {
                     return `
-                        <div class="result-item">
+                        <div class="result-item" data-name="${e.charAt(0).toUpperCase() + e.slice(1)}" data-list-type="${key}">
                             <span>${e.charAt(0).toUpperCase() + e.slice(1)}</span>
                         </div>
                     `;
@@ -28,9 +28,9 @@ const AllTemplate = {
         return Utils.minifyHTMLInArray(result, Object.keys(ListOfFilter));
     },
 
-    recipesHTML(searchValue = "") {
+    recipesHTML(searchValue, listOfAdvancedFilterSelected) {
         let cards = "";
-        let listOfRecipes = DataPreparation.handleListOfRecipes(searchValue);
+        let listOfRecipes = DataPreparation.handleListOfRecipes(searchValue, listOfAdvancedFilterSelected);
 
         if (listOfRecipes.length === 0) {
             cards = `
@@ -92,7 +92,33 @@ const AllTemplate = {
         });
 
         return cards;
+    },
+
+    advancedSearchTagsHTML(name, listType) {
+        let tagClass = "";
+
+        if (listType == "listOfIngredients") {
+            tagClass = "ingredients";
+        }
+        if (listType == "listOfMachines") {
+            tagClass = "machines";
+        }
+        if (listType == "listOfTools") {
+            tagClass = "tools";
+        }
+
+        let tags = `
+        <div class="advanced-filter-tag ${tagClass}">
+            <p class="text">${name}</p>
+            <button class="btn-close">
+                <i class="fa-regular fa-circle-xmark fa-xl"></i>
+            </button>
+        </div>
+        `;
+
+        return tags;
     }
+
 };
 
 export default AllTemplate;

@@ -54,18 +54,58 @@ const DataPreparation = {
      * @param {string} searchValue - The value to search for in the recipe name, ingredients, and description.
      * @returns {Array} - An array of recipe objects that match the search value.
      */
-    handleListOfRecipes(searchValue) {
+    handleListOfRecipes(searchValue, listOfAdvancedFilterSelected) {
         this.listOfRecipes = [];
 
         for (const recipe of this.recipes) {
             if (this.searchRecipeName(recipe, searchValue) ||
                 this.searchRecipeIngredients(recipe, searchValue) ||
                 this.searchRecipeDescription(recipe, searchValue)) {
-                this.listOfRecipes.push(recipe);
+                if (this.filterRecipesByIngredients(recipe, listOfAdvancedFilterSelected.listOfIngredients) &&
+                    this.filterRecipesByMachines(recipe, listOfAdvancedFilterSelected.listOfMachines) &&
+                    this.filterRecipesByTools(recipe, listOfAdvancedFilterSelected.listOfTools)) {
+
+                    this.listOfRecipes.push(recipe);
+                }
             }
         };
 
+        console.log(this.listOfRecipes);
         return this.listOfRecipes;
+    },
+
+    filterRecipesByIngredients(recipe, ingredients) {
+        if (ingredients.length !== 0) {
+            return ingredients.every(ingredient => {
+                return recipe.ingredients.some(ingredientData => {
+                    return ingredientData.ingredient.toLowerCase() === ingredient;
+                });
+            });
+        } else {
+            return true;
+        }
+    },
+
+    filterRecipesByMachines(recipe, machines) {
+        if (machines.length !== 0) {
+            return machines.every(machine => {
+                return recipe.appliance.toLowerCase() === machine;
+            });
+        } else {
+            return true;
+        }
+    },
+
+    filterRecipesByTools(recipe, tools) {
+        if (tools.length !== 0) {
+            return tools.every(tool => {
+                return recipe.ustensils.some(ustensil => {
+                    return ustensil.toLowerCase() === tool;
+                });
+            });
+        } else {
+            return true;
+        }
     },
 
     /**

@@ -115,13 +115,21 @@ a {
 }
 .search-area .advanced-search-tags .advanced-filter-tag {
   display: flex;
-  background-color: #3282F7;
   color: #fff;
   height: 2.5rem;
   border-radius: 5px;
   align-items: center;
   pointer-events: none;
   transition: box-shadow 0.2s ease;
+}
+.search-area .advanced-search-tags .advanced-filter-tag.ingredients {
+  background-color: #3282F7;
+}
+.search-area .advanced-search-tags .advanced-filter-tag.machines {
+  background-color: #68D9A4;
+}
+.search-area .advanced-search-tags .advanced-filter-tag.tools {
+  background-color: #ED6454;
 }
 .search-area .advanced-search-tags .advanced-filter-tag:hover {
   box-shadow: 0 0 3px 1px #D04F4F;

@@ -5,13 +5,24 @@
 
     .advanced-filter-tag {
         display: flex;
-        background-color: $dodgerBlue;
         color: #fff;
         height: 2.5rem;
         border-radius: 5px;
         align-items: center;
         pointer-events: none;
         transition: box-shadow 0.2s ease;
+
+        &.ingredients {
+            background-color: $dodgerBlue;
+        }
+    
+        &.machines {
+            background-color: $mediumAquamarine;
+        }
+    
+        &.tools {
+            background-color: $beanRed;
+        }
 
         &:hover {
             box-shadow: 0 0 3px 1px #D04F4F;

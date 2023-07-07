@@ -12,6 +12,7 @@ window.addEventListener("load", () => {
     let inputIngredients = document.getElementById("input-ingredients");
     let inputMachines = document.getElementById("input-machines");
     let inputTools = document.getElementById("input-tools");
+    let advancedSearchTags = document.querySelector(".advanced-search-tags");
 
     // VARIABLES ---------------------------------------------------------------
     let searchValue = "";
@@ -19,6 +20,11 @@ window.addEventListener("load", () => {
         "ingredient": "",
         "machine": "",
         "tool": ""
+    };
+    let listOfAdvancedFilterSelected = {
+        "listOfIngredients": [],
+        "listOfMachines": [],
+        "listOfTools": []
     };
     let listOfAdvancedFilter = [
         {
@@ -36,13 +42,49 @@ window.addEventListener("load", () => {
     ];
 
     // DOM FUNCTIONS -----------------------------------------------------------
-    const ASFinnerHTML = (listOfAF, isInit, searchValue = null, type = null) => {
-        if (searchValue !== null && type !== null) {
-            ASFValues[type] = searchValue;
+    const updateASresultsInDOM = (listOfAF, isInit, ASinputValue = null, type = null) => {
+        // If the function is used to initialize the advanced search tags,
+        // then we retrieve the values of the advanced search fields
+        // and store them in ASFValues.
+        if (ASinputValue !== null && type !== null) {
+            ASFValues[type] = ASinputValue;
         }
 
+        // Initialize each advanced filter in the DOM using the listOfAdvancedFilter array.
         listOfAF.forEach(advancedFilter => {
             advancedFilter.DOM.innerHTML = AllTemplate.advancedFilterHTML(isInit, ASFValues)[advancedFilter.type];
+        });
+
+        // If the function is used to initialize the DOM,
+        // or when one of the advanced search fields is modified,
+        // or when a search is performed with the main search field,
+        // then we initialize the events on the advanced filter results.
+        // To do this, we retrieve all the advanced search tags from the advanced search area,
+        // for each tag we retrieve its name and type (ingredient, machine or tool),
+        // then we add the clicked tag to the selected tags area,
+        // and we add the name of the clicked tag to the listOfAdvancedFilterSelected array.
+        // The goal is to be able to perform a search with the selected tags.
+        // Thus, we inject in the DOM the recipes corresponding to the selected tags.
+        // We replace the focus on the advanced search field.
+        // And finally, we reset the results of the advanced filters in the DOM,
+        // in order to update the results of the advanced filters.
+        let ASFitems = document.querySelectorAll(".result-item");
+        ASFitems.forEach((ASFitem) => {
+            ASFitem.addEventListener("click", (e) => {
+
+                let name = e.target.closest(".result-item").dataset.name;
+                let listType = e.target.closest(".result-item").dataset.listType;
+
+                advancedSearchTags.innerHTML += AllTemplate.advancedSearchTagsHTML(name, listType);
+
+                listOfAdvancedFilterSelected[listType].push(name.toLowerCase());
+
+                cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue, listOfAdvancedFilterSelected);
+
+                e.target.closest(".advanced-search-field").querySelector("input").focus();
+
+                updateASresultsInDOM(listOfAdvancedFilter, false);
+            });
         });
     };
 
@@ -54,29 +96,29 @@ window.addEventListener("load", () => {
     searchInput.addEventListener("input", (e) => {
         searchValue = e.target.value.toLowerCase();
         if (searchValue.length >= 3) {
-            cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue);
-            ASFinnerHTML(listOfAdvancedFilter, false);
+            cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue, listOfAdvancedFilterSelected);
+            updateASresultsInDOM(listOfAdvancedFilter, false);
         } else {
-            cardsArea.innerHTML = AllTemplate.recipesHTML();
-            ASFinnerHTML(listOfAdvancedFilter, false);
+            cardsArea.innerHTML = AllTemplate.recipesHTML("", listOfAdvancedFilterSelected);
+            updateASresultsInDOM(listOfAdvancedFilter, false);
         }
     });
 
     inputIngredients.addEventListener("input", (e) => {
-        ASFinnerHTML(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "ingredient");
+        updateASresultsInDOM(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "ingredient");
     });
 
     inputMachines.addEventListener("input", (e) => {
-        ASFinnerHTML(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "machine");
+        updateASresultsInDOM(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "machine");
     });
 
     inputTools.addEventListener("input", (e) => {
-        ASFinnerHTML(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "tool");
+        updateASresultsInDOM(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "tool");
     });
 
     // INIT --------------------------------------------------------------------
-    cardsArea.innerHTML = AllTemplate.recipesHTML();
-    ASFinnerHTML(listOfAdvancedFilter, true);
+    cardsArea.innerHTML = AllTemplate.recipesHTML("", listOfAdvancedFilterSelected);
+    updateASresultsInDOM(listOfAdvancedFilter, true);
 
     // FONCTIONS ---------------------------------------------------------------
     /**
