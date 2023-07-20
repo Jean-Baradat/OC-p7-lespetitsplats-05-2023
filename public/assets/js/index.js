@@ -44,13 +44,13 @@ window.addEventListener("load", () => {
     // DOM FUNCTIONS -----------------------------------------------------------
     const updateASresultsInDOM = (listOfAF, isInit, ASinputValue = null, type = null) => {
         // If the function is used to initialize the advanced search tags,
-        // then we retrieve the values of the advanced search fields
+        // then we retrieve the values of the advanced search fields input,
         // and store them in ASFValues.
         if (ASinputValue !== null && type !== null) {
             ASFValues[type] = ASinputValue;
         }
 
-        // Initialize each advanced filter in the DOM using the listOfAdvancedFilter array.
+        // Initialize each advanced filter in the DOM using the listOfAdvancedFilter (= listOfAF) array.
         listOfAF.forEach(advancedFilter => {
             advancedFilter.DOM.innerHTML = AllTemplate.advancedFilterHTML(isInit, ASFValues)[advancedFilter.type];
         });
@@ -75,11 +75,11 @@ window.addEventListener("load", () => {
                 let name = e.target.closest(".result-item").dataset.name;
                 let listType = e.target.closest(".result-item").dataset.listType;
 
-                advancedSearchTags.innerHTML += AllTemplate.advancedSearchTagsHTML(name, listType);
-
-                listOfAdvancedFilterSelected[listType].push(name.toLowerCase());
-
-                cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue, listOfAdvancedFilterSelected);
+                if (!listOfAdvancedFilterSelected[listType].includes(name.toLowerCase())) {
+                    advancedSearchTags.innerHTML += AllTemplate.advancedSearchTagsHTML(name, listType);
+                    listOfAdvancedFilterSelected[listType].push(name.toLowerCase());
+                    cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue, listOfAdvancedFilterSelected);
+                }
 
                 e.target.closest(".advanced-search-field").querySelector("input").focus();
 
