@@ -3,7 +3,8 @@ import AllTemplate from "./template/AllTemplate.js";
 window.addEventListener("load", () => {
 
 
-    // DOM ---------------------------------------------------------------------
+
+    // DOM ----------------------------------------------------------------------------------------
     let cardsArea = document.querySelector(".cards-area");
     let ASFsearchArea = document.querySelectorAll(".advanced-search-field .search-area");
     let advancedSearchFields = document.querySelectorAll(".advanced-search-field");
@@ -17,7 +18,8 @@ window.addEventListener("load", () => {
     let advancedSearchTags = document.querySelector(".advanced-search-tags");
 
 
-    // VARIABLES ---------------------------------------------------------------
+
+    // VARIABLES ----------------------------------------------------------------------------------
     let searchValue = "";
 
     let ASFValues = {
@@ -48,7 +50,8 @@ window.addEventListener("load", () => {
     ];
 
 
-    // DOM FUNCTIONS -----------------------------------------------------------
+
+    // DOM FUNCTIONS ------------------------------------------------------------------------------
 
     /**
      * Updates the results of the advanced filters in the DOM.
@@ -75,7 +78,8 @@ window.addEventListener("load", () => {
     };
 
 
-    // EVENTS ------------------------------------------------------------------
+
+    // EVENTS -------------------------------------------------------------------------------------
     ASFsearchArea.forEach((advancedSearchField) => {
         advancedSearchField.addEventListener("click", (e) => ASFevent(e));
     });
@@ -95,12 +99,14 @@ window.addEventListener("load", () => {
     });
 
 
-    // INIT --------------------------------------------------------------------
+
+    // INIT ---------------------------------------------------------------------------------------
     cardsArea.innerHTML = AllTemplate.recipesHTML("", listOfAdvancedFilterSelected);
     updateASresultsInDOM(listOfAdvancedFilter, true);
 
 
-    // FONCTIONS ---------------------------------------------------------------
+
+    // FONCTIONS ---------------------------------------------------------------------------------
 
     /**
      * This function is called when an advanced search tag is clicked.
