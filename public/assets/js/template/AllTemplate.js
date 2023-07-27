@@ -3,22 +3,25 @@ import Utils from "../utils/utils.js";
 
 const AllTemplate = {
 
-    advancedFilterHTML(isInit, ASFValues) {
+    advancedFilterHTML(isInit, ASFValues, listOfAdvancedFilterSelected) {
         let result = {};
-        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit, ASFValues);
+        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit, ASFValues, listOfAdvancedFilterSelected);
 
         for (const [key, value] of Object.entries(ListOfFilter)) {
             if (value.length != 0) {
                 result[key] = value.map(e => {
                     return `
-                        <div class="result-item" data-name="${e.charAt(0).toUpperCase() + e.slice(1)}" data-list-type="${key}">
-                            <span>${e.charAt(0).toUpperCase() + e.slice(1)}</span>
+                        <div class="advanced-filter-item" data-name="${e}" data-list-type="${key}">
+                            <p class="text">${e.charAt(0).toUpperCase() + e.slice(1)}</p>
+                            <button class="btn-close">
+                                <i class="fa-regular fa-circle-xmark fa-xl"></i>
+                            </button>
                         </div>
                     `;
                 }).join("");
             } else {
                 result[key] = `
-                    <div class="result-item-empty">
+                    <div class="empty">
                         <span>Aucun résultat</span>
                     </div>
                 `;
@@ -93,32 +96,6 @@ const AllTemplate = {
 
         return cards;
     },
-
-    advancedSearchTagsHTML(name, listType) {
-        let tagClass = "";
-
-        if (listType == "listOfIngredients") {
-            tagClass = "ingredients";
-        }
-        if (listType == "listOfMachines") {
-            tagClass = "machines";
-        }
-        if (listType == "listOfTools") {
-            tagClass = "tools";
-        }
-
-        let tags = `
-        <div class="advanced-filter-tag ${tagClass}">
-            <p class="text">${name}</p>
-            <button class="btn-close">
-                <i class="fa-regular fa-circle-xmark fa-xl"></i>
-            </button>
-        </div>
-        `;
-
-        return tags;
-    }
-
 };
 
 export default AllTemplate;

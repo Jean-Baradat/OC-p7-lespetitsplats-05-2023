@@ -8,10 +8,12 @@ const DataPreparation = {
     listOfTools: [],
     listOfRecipes: [],
 
-    listsOfAdvancedFilter(isInit, ASFValues) {
+    listsOfAdvancedFilter(isInit, ASFValues, listOfAdvancedFilterSelected) {
         this.listOfIngredients = [];
         this.listOfMachines = [];
         this.listOfTools = [];
+
+        console.log(listOfAdvancedFilterSelected);
 
         if (isInit) {
             this.listOfRecipes = this.recipes;
@@ -22,14 +24,14 @@ const DataPreparation = {
             recipe.ingredients.map(ingredient => {
                 let ingredientName = ingredient.ingredient.toLowerCase();
 
-                if (!this.listOfIngredients.includes(ingredientName) && ingredientName.includes(ASFValues.ingredient)) {
+                if (!this.listOfIngredients.includes(ingredientName) && ingredientName.includes(ASFValues.ingredient) && !listOfAdvancedFilterSelected.listOfIngredients.includes(ingredientName)) {
                     this.listOfIngredients.push(ingredientName);
                 }
             });
 
             // ---------------------------------------------------------------
             let applianceName = recipe.appliance.toLowerCase();
-            if (!this.listOfMachines.includes(applianceName) && applianceName.includes(ASFValues.machine)) {
+            if (!this.listOfMachines.includes(applianceName) && applianceName.includes(ASFValues.machine) && !listOfAdvancedFilterSelected.listOfMachines.includes(applianceName)) {
                 this.listOfMachines.push(applianceName);
             }
 
@@ -37,7 +39,7 @@ const DataPreparation = {
             recipe.ustensils.map(tool => {
                 let toolName = tool.toLowerCase();
 
-                if (!this.listOfTools.includes(toolName) && toolName.includes(ASFValues.tool)) {
+                if (!this.listOfTools.includes(toolName) && toolName.includes(ASFValues.tool) && !listOfAdvancedFilterSelected.listOfTools.includes(toolName)) {
                     this.listOfTools.push(toolName);
                 }
             });

@@ -122,13 +122,13 @@ a {
   pointer-events: none;
   transition: box-shadow 0.2s ease;
 }
-.search-area .advanced-search-tags .advanced-filter-tag.ingredients {
+.search-area .advanced-search-tags .advanced-filter-tag[data-list-type=listOfIngredients] {
   background-color: #3282F7;
 }
-.search-area .advanced-search-tags .advanced-filter-tag.machines {
+.search-area .advanced-search-tags .advanced-filter-tag[data-list-type=listOfMachines] {
   background-color: #68D9A4;
 }
-.search-area .advanced-search-tags .advanced-filter-tag.tools {
+.search-area .advanced-search-tags .advanced-filter-tag[data-list-type=listOfTools] {
   background-color: #ED6454;
 }
 .search-area .advanced-search-tags .advanced-filter-tag:hover {
@@ -210,18 +210,23 @@ a {
   gap: 0.1rem;
   padding: 0.5rem 1rem;
 }
-.search-area .advanced-search .advanced-search-field .result-area .result-content .result-item {
-  color: #fff;
+.search-area .advanced-search .advanced-search-field .result-area .result-content .advanced-filter-item {
   font-size: 18px;
   padding: 0.5rem;
   border-radius: 5px;
 }
-.search-area .advanced-search .advanced-search-field .result-area .result-content .result-item:hover {
+.search-area .advanced-search .advanced-search-field .result-area .result-content .advanced-filter-item .text {
+  color: #fff;
+}
+.search-area .advanced-search .advanced-search-field .result-area .result-content .advanced-filter-item .btn-close {
+  display: none;
+}
+.search-area .advanced-search .advanced-search-field .result-area .result-content .advanced-filter-item:hover {
   cursor: pointer;
   box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.5);
   background-color: rgba(255, 255, 255, 0.1);
 }
-.search-area .advanced-search .advanced-search-field .result-area .result-content .result-item-empty {
+.search-area .advanced-search .advanced-search-field .result-area .result-content .empty {
   grid-column: 1/-1;
   text-align: center;
   color: rgba(255, 255, 255, 0.5);

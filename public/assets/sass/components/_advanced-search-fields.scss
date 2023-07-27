@@ -62,11 +62,18 @@
             gap: 0.1rem;
             padding: 0.5rem 1rem;
 
-            .result-item {
-                color: #fff;
+            .advanced-filter-item {
                 font-size: 18px;
                 padding: 0.5rem;
                 border-radius: 5px;
+
+                .text {
+                    color: #fff;
+                }
+
+                .btn-close {
+                    display: none;
+                }
 
                 &:hover {
                     cursor: pointer;
@@ -75,7 +82,7 @@
                 }
             }
 
-            .result-item-empty {
+            .empty {
                 grid-column: 1 / -1;
                 text-align: center;
                 color: rgba(255, 255, 255, 0.5);
