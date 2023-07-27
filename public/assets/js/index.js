@@ -1,6 +1,8 @@
 import AllTemplate from "./template/AllTemplate.js";
 
 window.addEventListener("load", () => {
+
+
     // DOM ---------------------------------------------------------------------
     let cardsArea = document.querySelector(".cards-area");
     let ASFsearchArea = document.querySelectorAll(".advanced-search-field .search-area");
@@ -14,6 +16,7 @@ window.addEventListener("load", () => {
     let inputTools = document.getElementById("input-tools");
     let advancedSearchTags = document.querySelector(".advanced-search-tags");
 
+
     // VARIABLES ---------------------------------------------------------------
     let searchValue = "";
 
@@ -22,11 +25,13 @@ window.addEventListener("load", () => {
         "machine": "",
         "tool": ""
     };
+
     let listOfAdvancedFilterSelected = {
         "listOfIngredients": [],
         "listOfMachines": [],
         "listOfTools": []
     };
+
     let listOfAdvancedFilter = [
         {
             "DOM": ASFingredientsResultContent,
@@ -42,11 +47,18 @@ window.addEventListener("load", () => {
         }
     ];
 
+
     // DOM FUNCTIONS -----------------------------------------------------------
+
+    /**
+     * Updates the results of the advanced filters in the DOM.
+     * 
+     * @param {Array} listOfAF - An array of objects containing the DOM element and the type of advanced filter.
+     * @param {boolean} isInit - A boolean indicating whether the function is used to initialize the advanced search tags.
+     * @param {string} ASinputValue - The value of the advanced search field input.
+     * @param {string} type - The type of advanced filter (ingredient, machine or tool).
+     */
     const updateASresultsInDOM = (listOfAF, isInit, ASinputValue = null, type = null) => {
-        // If the function is used to initialize the advanced search tags,
-        // then we retrieve the values of the advanced search fields input,
-        // and store them in ASFValues.
         if (ASinputValue !== null && type !== null) {
             ASFValues[type] = ASinputValue;
         }
@@ -61,6 +73,7 @@ window.addEventListener("load", () => {
             ASFitem.addEventListener("click", (e) => clickOnASFitem(e));
         });
     };
+
 
     // EVENTS ------------------------------------------------------------------
     ASFsearchArea.forEach((advancedSearchField) => {
@@ -81,37 +94,39 @@ window.addEventListener("load", () => {
         updateASresultsInDOM(listOfAdvancedFilter, false, e.target.value.toLowerCase(), "tool");
     });
 
+
     // INIT --------------------------------------------------------------------
     cardsArea.innerHTML = AllTemplate.recipesHTML("", listOfAdvancedFilterSelected);
     updateASresultsInDOM(listOfAdvancedFilter, true);
 
+
     // FONCTIONS ---------------------------------------------------------------
 
     /**
-     * If the function is used to initialize the DOM,
-     * or when one of the advanced search fields is modified,
-     * or when a search is performed with the main search field,
-     * then we initialize the events on the advanced filter results.
-     * To do this, we retrieve all the advanced search tags from the advanced search area,
-     * for each tag we retrieve its name and type (ingredient, machine or tool),
-     * then we add the clicked tag to the selected tags area,
-     * and we add the name of the clicked tag to the listOfAdvancedFilterSelected array.
-     * The goal is to be able to perform a search with the selected tags.
-     * Thus, we inject in the DOM the recipes corresponding to the selected tags.
-     * We replace the focus on the advanced search field.
-     * And finally, we reset the results of the advanced filters in the DOM,
-     * in order to update the results of the advanced filters.
-     * @param {*} e 
+     * This function is called when an advanced search tag is clicked.
+     * It is used to initialize the DOM, or when one of the advanced search fields is modified,
+     * or when a search is performed with the main search field.
+     * 
+     * First, it checks if the clicked element is an advanced search tag.
+     * If it is, then it removes the tag from the selected tags area and the corresponding item from the listOfAdvancedFilterSelected array.
+     * It then injects in the DOM the recipes corresponding to the selected tags, and updates the results of the advanced filters.
+     * 
+     * If the clicked element is not an advanced search tag, then it retrieves the name and type (ingredient, machine or tool) of the clicked tag.
+     * It then adds the clicked tag to the selected tags area, and adds the name of the clicked tag to the listOfAdvancedFilterSelected array.
+     * It injects in the DOM the recipes corresponding to the selected tags, and updates the results of the advanced filters.
+     * 
+     * Finally, it replaces the focus on the advanced search field.
+     * 
+     * @param {*} e - The event object.
      */
     const clickOnASFitem = (e) => {
-        if (e.target.closest(".advanced-filter-tag")) {
+        let advancedFilterTag = e.target.closest(".advanced-filter-tag");
 
-            let advancedFilterTag = e.target.closest(".advanced-filter-tag");
-            let listType = advancedFilterTag.dataset.listType;
-            let index = listOfAdvancedFilterSelected[listType].indexOf(advancedFilterTag.querySelector(".text").innerText.toLowerCase());
-
+        if (advancedFilterTag !== null) {
             advancedFilterTag.remove();
 
+            let listType = advancedFilterTag.dataset.listType;
+            let index = listOfAdvancedFilterSelected[listType].indexOf(advancedFilterTag.querySelector(".text").innerText.toLowerCase());
             listOfAdvancedFilterSelected[listType].splice(index, 1);
             cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue, listOfAdvancedFilterSelected);
 
@@ -122,7 +137,6 @@ window.addEventListener("load", () => {
             e.target.closest(".advanced-search-field").querySelector("input").focus();
 
             if (!listOfAdvancedFilterSelected[listType].includes(name.toLowerCase())) {
-
                 advancedSearchTags.appendChild(e.target.closest(".advanced-filter-item"));
                 e.target.closest(".advanced-filter-item").classList.add("advanced-filter-tag");
                 e.target.closest(".advanced-filter-item").classList.remove("advanced-filter-item");
@@ -138,11 +152,18 @@ window.addEventListener("load", () => {
 
 
     /**
+     * Handles the input event on the main search field.
      * 
-     * @param {*} e 
+     * This function updates the searchValue variable with the value of the main search input field in lowercase.
+     * If the length of the searchValue is greater than or equal to 3, it injects in the DOM the recipes 
+     * corresponding to the searchValue and the selected advanced search tags, and updates the results of the advanced filters.
+     * If the length of the searchValue is less than 3, it injects in the DOM all the recipes and updates the results of the advanced filters.
+     * 
+     * @param {Event} e - The event object.
      */
     const mainSearchInput = (e) => {
         searchValue = e.target.value.toLowerCase();
+
         if (searchValue.length >= 3) {
             cardsArea.innerHTML = AllTemplate.recipesHTML(searchValue, listOfAdvancedFilterSelected);
             updateASresultsInDOM(listOfAdvancedFilter, false);
@@ -153,31 +174,32 @@ window.addEventListener("load", () => {
     };
 
     /**
+     * Handles the click event on the advanced search field.
      * 
-     * @param {*} e 
+     * This function toggles the active state of the clicked advanced search field, and sets focus on its input field.
+     * It also removes the active state from all other advanced search fields.
+     * 
+     * @param {Event} e - The event object.
      */
     const ASFevent = (e) => {
         const clickedASF = e.target.closest(".advanced-search-field");
 
-        // switch active on clicked advancedSearchField
         ASFswitchToggle(clickedASF, true);
-
-        // get focus on clicked advancedSearchField input
         clickedASF.querySelector("input").focus();
 
         // remove active class on other advancedSearchFields
         advancedSearchFields.forEach((advancedSearchField) => {
             if (advancedSearchField !== clickedASF) {
-                // switch to default on other advancedSearchFields
                 ASFswitchToggle(advancedSearchField, false);
             }
         });
     };
 
     /**
+     * Toggles the advanced search field switch and its associated elements.
      * 
-     * @param {*} ASF 
-     * @param {*} isASFClicked 
+     * @param {HTMLElement} ASF - The advanced search field element.
+     * @param {boolean} isASFClicked - A boolean indicating whether the advanced search field has been clicked.
      */
     const ASFswitchToggle = (ASF, isASFClicked) => {
         if (isASFClicked) {
