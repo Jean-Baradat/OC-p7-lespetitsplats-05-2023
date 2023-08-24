@@ -75,18 +75,26 @@ const DataPreparation = {
     handleListOfRecipes(searchValue, listOfAdvancedFilterSelected) {
         this.listOfRecipes = [];
 
-        for (const recipe of this.recipes) {
-            if (this.searchRecipeName(recipe, searchValue) ||
-                this.searchRecipeIngredients(recipe, searchValue) ||
-                this.searchRecipeDescription(recipe, searchValue)) {
-                if (this.filterRecipeByIngredients(recipe, listOfAdvancedFilterSelected.listOfIngredients) &&
-                    this.filterRecipeByMachines(recipe, listOfAdvancedFilterSelected.listOfMachines) &&
-                    this.filterRecipeByTools(recipe, listOfAdvancedFilterSelected.listOfTools)) {
+        const recipesByName = this.recipes.filter((item) => {
+            return this.searchRecipeName(item, searchValue)
+        });
+        const recipesByIngredients = this.recipes.filter((item) => {
+            return this.searchRecipeIngredients(item, searchValue)
+        });
+        const recipesByDescription = this.recipes.filter((item) => {
+            return this.searchRecipeDescription(item, searchValue)
+        });
 
-                    this.listOfRecipes.push(recipe);
-                }
+        this.resultOfMainSearch = [...new Set([].concat(recipesByName, recipesByIngredients, recipesByDescription))];
+
+        for (const recipe of this.resultOfMainSearch) {
+            if (this.filterRecipeByIngredients(recipe, listOfAdvancedFilterSelected.listOfIngredients) &&
+                this.filterRecipeByMachines(recipe, listOfAdvancedFilterSelected.listOfMachines) &&
+                this.filterRecipeByTools(recipe, listOfAdvancedFilterSelected.listOfTools)) {
+
+                this.listOfRecipes.push(recipe);
             }
-        };
+        }
 
         return this.listOfRecipes;
     },
