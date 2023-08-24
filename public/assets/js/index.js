@@ -123,7 +123,7 @@ window.addEventListener("load", () => {
      * 
      * Finally, it replaces the focus on the advanced search field.
      * 
-     * @param {*} e - The event object.
+     * @param {Event} e - The event object.
      */
     const clickOnASFitem = (e) => {
         let advancedFilterTag = e.target.closest(".advanced-filter-tag");
