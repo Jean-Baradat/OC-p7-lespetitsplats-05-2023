@@ -3,6 +3,14 @@ import Utils from "../utils/utils.js";
 
 const AllTemplate = {
 
+    /**
+     * Generates the HTML for the advanced filter section.
+     * 
+     * @param {boolean} isInit - Indicates whether the function is being called for the first time.
+     * @param {Object} ASFValues - The values of the advanced search filters.
+     * @param {Object} listOfAdvancedFilterSelected - The list of selected advanced filters.
+     * @returns {string} The generated HTML for the advanced filter section.
+     */
     advancedFilterHTML(isInit, ASFValues, listOfAdvancedFilterSelected) {
         let result = {};
         let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit, ASFValues, listOfAdvancedFilterSelected);
@@ -31,6 +39,13 @@ const AllTemplate = {
         return Utils.minifyHTMLInArray(result, Object.keys(ListOfFilter));
     },
 
+    /**
+     * Generates the HTML for the recipe cards based on the search value and selected advanced filters.
+     * 
+     * @param {string} searchValue - The search value.
+     * @param {Object} listOfAdvancedFilterSelected - The list of selected advanced filters.
+     * @returns {string} The generated HTML for the recipe cards.
+     */
     recipesHTML(searchValue, listOfAdvancedFilterSelected) {
         let cards = "";
         let listOfRecipes = DataPreparation.handleListOfRecipes(searchValue, listOfAdvancedFilterSelected);

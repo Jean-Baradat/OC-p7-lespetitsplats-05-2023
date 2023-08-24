@@ -1,3 +1,8 @@
+/**
+ * Fetches the recipe data from recipes.js.
+ * 
+ * @returns {Promise} - A promise that resolves to an array of recipe objects.
+ */
 const getData = async () => {
     const DATA_URL = "./../../../../data/recipes.js";
 
