@@ -75,19 +75,13 @@ const DataPreparation = {
     handleListOfRecipes(searchValue, listOfAdvancedFilterSelected) {
         this.listOfRecipes = [];
 
-        const recipesByName = this.recipes.filter((item) => {
-            return this.searchRecipeName(item, searchValue)
-        });
-        const recipesByIngredients = this.recipes.filter((item) => {
-            return this.searchRecipeIngredients(item, searchValue)
-        });
-        const recipesByDescription = this.recipes.filter((item) => {
-            return this.searchRecipeDescription(item, searchValue)
+        const recipes = this.recipes.filter((item) => {
+            return this.searchRecipeName(item, searchValue) ||
+                this.searchRecipeIngredients(item, searchValue) ||
+                this.searchRecipeDescription(item, searchValue);
         });
 
-        this.resultOfMainSearch = [...new Set([].concat(recipesByName, recipesByIngredients, recipesByDescription))];
-
-        for (const recipe of this.resultOfMainSearch) {
+        for (const recipe of recipes) {
             if (this.filterRecipeByIngredients(recipe, listOfAdvancedFilterSelected.listOfIngredients) &&
                 this.filterRecipeByMachines(recipe, listOfAdvancedFilterSelected.listOfMachines) &&
                 this.filterRecipeByTools(recipe, listOfAdvancedFilterSelected.listOfTools)) {
