@@ -75,10 +75,10 @@ const DataPreparation = {
     handleListOfRecipes(searchValue, listOfAdvancedFilterSelected) {
         this.listOfRecipes = [];
 
-        const recipes = this.recipes.filter((item) => {
-            return this.searchRecipeName(item, searchValue) ||
-                this.searchRecipeIngredients(item, searchValue) ||
-                this.searchRecipeDescription(item, searchValue);
+        const recipes = this.recipes.filter((recipe) => {
+            return this.searchRecipeName(recipe, searchValue) ||
+                this.searchRecipeIngredients(recipe, searchValue) ||
+                this.searchRecipeDescription(recipe, searchValue);
         });
 
         for (const recipe of recipes) {
