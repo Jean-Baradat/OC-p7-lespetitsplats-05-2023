@@ -1,10 +1,29 @@
 import DataPreparation from "../data/DataPreparation.js";
-import Utils from "../utils/utils.js";
+import Utils from "../utils/Utils.js";
 
+/**
+ * Contains all the methods for generating HTML content.
+ * 
+ * @namespace AllTemplate
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ * @created 2023-05
+ * @updated 2023-08-26
+ * 
+ * @author Jean Baradat
+ * @modifiedby Jean Baradat
+ * 
+ * @property {method} advancedFilterHTML - Generates the HTML for the advanced filter section.
+ * @property {method} recipesHTML - Generates the HTML for the recipe cards based on the search value and selected advanced filters.
+ */
 const AllTemplate = {
 
     /**
      * Generates the HTML for the advanced filter section.
+     * 
+     * @memberof AllTemplate
+     * @method advancedFilterHTML
      * 
      * @param {boolean} isInit - Indicates whether the function is being called for the first time.
      * @param {Object} ASFValues - The values of the advanced search filters.
@@ -41,6 +60,9 @@ const AllTemplate = {
 
     /**
      * Generates the HTML for the recipe cards based on the search value and selected advanced filters.
+     * 
+     * @memberof AllTemplate
+     * @method recipesHTML
      * 
      * @param {string} searchValue - The search value.
      * @param {Object} listOfAdvancedFilterSelected - The list of selected advanced filters.

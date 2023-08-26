@@ -1,0 +1,254 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title> template/AllTemplate.js</title>
+
+  <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="./build/entry.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+  <link type="text/css" rel="stylesheet" href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+  <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+  <link type="text/css" rel="stylesheet" href="">
+  <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+  
+</head>
+
+
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+    
+
+<div class="top-nav">
+    <div class="inner">
+        <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+        </a>
+        <div class="logo">
+            
+            
+        </div>
+        <div class="menu">
+            
+            <div class="navigation">
+                <a
+                    href="index.html"
+                    class="link"
+                >
+                    Documentation
+                </a>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+    <div id="main">
+        <div
+            class="sidebar "
+            id="sidebarNav"
+        >
+            
+            <nav>
+                
+                    <h2><a href="index.html">Documentation</a></h2><div class="category"><h3>Namespaces</h3><ul><li><a href="AllTemplate.html">AllTemplate</a></li><li><a href="DataPreparation.html">DataPreparation</a></li><li><a href="Utils.html">Utils</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ASFevent">ASFevent</a></li><li><a href="global.html#ASFswitchToggle">ASFswitchToggle</a></li><li><a href="global.html#clickOnASFitem">clickOnASFitem</a></li><li><a href="global.html#getData">getData</a></li><li><a href="global.html#mainSearchInput">mainSearchInput</a></li><li><a href="global.html#updateASresultsInDOM">updateASresultsInDOM</a></li></ul></div>
+                
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <p>Source</p>
+                    <h1>template/AllTemplate.js</h1>
+                </header>
+                
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import DataPreparation from "../data/DataPreparation.js";
+import Utils from "../utils/Utils.js";
+
+/**
+ * Contains all the methods for generating HTML content.
+ * 
+ * @namespace AllTemplate
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ * @created 2023-05
+ * @updated 2023-08-26
+ * 
+ * @author Jean Baradat
+ * @modifiedby Jean Baradat
+ * 
+ * @property {method} advancedFilterHTML - Generates the HTML for the advanced filter section.
+ * @property {method} recipesHTML - Generates the HTML for the recipe cards based on the search value and selected advanced filters.
+ */
+const AllTemplate = {
+
+    /**
+     * Generates the HTML for the advanced filter section.
+     * 
+     * @memberof AllTemplate
+     * @method advancedFilterHTML
+     * 
+     * @param {boolean} isInit - Indicates whether the function is being called for the first time.
+     * @param {Object} ASFValues - The values of the advanced search filters.
+     * @param {Object} listOfAdvancedFilterSelected - The list of selected advanced filters.
+     * @returns {string} The generated HTML for the advanced filter section.
+     */
+    advancedFilterHTML(isInit, ASFValues, listOfAdvancedFilterSelected) {
+        let result = {};
+        let ListOfFilter = DataPreparation.listsOfAdvancedFilter(isInit, ASFValues, listOfAdvancedFilterSelected);
+
+        for (const [key, value] of Object.entries(ListOfFilter)) {
+            if (value.length != 0) {
+                result[key] = value.map(e => {
+                    return `
+                        &lt;div class="advanced-filter-item" data-name="${e}" data-list-type="${key}">
+                            &lt;p class="text">${e.charAt(0).toUpperCase() + e.slice(1)}&lt;/p>
+                            &lt;button class="btn-close">
+                                &lt;i class="fa-regular fa-circle-xmark fa-xl">&lt;/i>
+                            &lt;/button>
+                        &lt;/div>
+                    `;
+                }).join("");
+            } else {
+                result[key] = `
+                    &lt;div class="empty">
+                        &lt;span>Aucun résultat&lt;/span>
+                    &lt;/div>
+                `;
+            }
+        }
+
+        return Utils.minifyHTMLInArray(result, Object.keys(ListOfFilter));
+    },
+
+    /**
+     * Generates the HTML for the recipe cards based on the search value and selected advanced filters.
+     * 
+     * @memberof AllTemplate
+     * @method recipesHTML
+     * 
+     * @param {string} searchValue - The search value.
+     * @param {Object} listOfAdvancedFilterSelected - The list of selected advanced filters.
+     * @returns {string} The generated HTML for the recipe cards.
+     */
+    recipesHTML(searchValue, listOfAdvancedFilterSelected) {
+        let cards = "";
+        let listOfRecipes = DataPreparation.handleListOfRecipes(searchValue, listOfAdvancedFilterSelected);
+
+        if (listOfRecipes.length === 0) {
+            cards = `
+            &lt;div class="no-result">
+                &lt;p>
+                    Aucune recette ne correspond à votre critère « ${searchValue} » vous pouvez chercher « tarte aux pommes », « poisson », etc.
+                &lt;/p>
+            &lt;/div>
+            `;
+        }
+
+        listOfRecipes.forEach(recipe => {
+            let ingredientsHtmlList = recipe.ingredients.map(ingredient => {
+                if (ingredient.quantity === undefined &amp;&amp; ingredient.unit === undefined) {
+                    return `
+                    &lt;li class="list-item">
+                        &lt;span class="bold">${ingredient.ingredient}&lt;/span>
+                    &lt;/li>
+                    `;
+                } else {
+                    return `
+                    &lt;li class="list-item">
+                        &lt;span class="bold">${ingredient.ingredient}:&lt;/span> ${ingredient.quantity ?? ""} ${ingredient.unit ?? ""}
+                    &lt;/li>
+                    `;
+                }
+            });
+
+            cards += `
+            &lt;article class="recipe-card">
+
+                &lt;!-- Card header -->
+                &lt;header class="heading">
+                    &lt;img src="./assets/img/demo-photo.jpg" alt="Photo de la recette" class="recipe-img">
+                    &lt;div class="content">
+                        &lt;h2 class="title" title="${recipe.name}">${Utils.cutString(recipe.name, 25)}&lt;/h2>
+                        &lt;div class="time">
+                            &lt;i class="fa-regular fa-clock fa-lg">&lt;/i>
+                            &lt;p class="nb-time">${recipe.time} min&lt;/p>
+                        &lt;/div>
+                    &lt;/div>
+                &lt;/header>
+                &lt;!-- End card header -->
+
+                &lt;!-- Card main content -->
+                &lt;main class="main-content">
+                    &lt;ul class="ingredient-list">
+                        ${ingredientsHtmlList.join("")}
+                    &lt;/ul>
+
+                    &lt;p class="recipe-summary">
+                        ${Utils.cutString(recipe.description, 160)}
+                    &lt;/p>
+                &lt;/main>
+                &lt;!-- End card main content -->
+
+            &lt;/article>
+            `;
+        });
+
+        return cards;
+    },
+};
+
+export default AllTemplate;</code></pre>
+        </article>
+    </section>
+
+
+
+
+            </div>
+            
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a> provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development Agency</a>
+                    </p>
+                </div>
+            </footer>
+            
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+<script src="scripts/app.min.js"></script>
+<script>PR.prettyPrint();</script>
+<script src="scripts/linenumber.js"> </script>
+
+
+</body>
+</html>

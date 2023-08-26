@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Home</title>
+
+    <script src="https://cdn.jsdelivr.net/gh/google/code-prettify@master/loader/run_prettify.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="./build/entry.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <!--[if lt IE 9]>
+        <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,400,700|Inconsolata,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+        integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link type="text/css" rel="stylesheet"
+        href="https://jmblog.github.io/color-themes-for-google-code-prettify/themes/tomorrow-night.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/app.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/iframe.css">
+    <link type="text/css" rel="stylesheet" href="styles/extra.css">
+    <script async defer src="https://buttons.github.io/buttons.js"></script>
+
+</head>
+
+<body class="layout small-header">
+    <div id="stickyNavbarOverlay"></div>
+
+    <div class="top-nav">
+        <div class="inner">
+            <a id="hamburger" role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+                <span aria-hidden="true"></span>
+            </a>
+            <div class="logo">
+                <a href="./../public/index.html">
+                    <img src="./img/icon/favicon.svg" alt="logo">
+                </a>
+            </div>
+        </div>
+    </div>
+    <div id="main">
+        <div class="sidebar " id="sidebarNav">
+            <nav>
+                <h2><a href="index.html">Documentation</a></h2>
+                <div class="category">
+                    <h3>Namespaces</h3>
+                    <ul>
+                        <li><a href="AllTemplate.html">AllTemplate</a></li>
+                        <li><a href="DataPreparation.html">DataPreparation</a></li>
+                        <li><a href="Utils.html">Utils</a></li>
+                    </ul>
+                    <h3>Global</h3>
+                    <ul>
+                        <li><a href="global.html#ASFevent">ASFevent</a></li>
+                        <li><a href="global.html#ASFswitchToggle">ASFswitchToggle</a></li>
+                        <li><a href="global.html#clickOnASFitem">clickOnASFitem</a></li>
+                        <li><a href="global.html#getData">getData</a></li>
+                        <li><a href="global.html#mainSearchInput">mainSearchInput</a></li>
+                        <li><a href="global.html#updateASresultsInDOM">updateASresultsInDOM</a></li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+        <div class="core" id="main-content-wrapper">
+            <div class="content">
+                <header class="page-title">
+                    <h1>Documentation - Les petits plats</h1>
+                </header>
+
+                <div class="page-content">
+                    <p>
+                        Welcome to the documentation of the <strong>Les petits plats</strong> project.
+                    </p>
+
+                    <h2>Introduction</h2>
+                    <p>
+                        OpenClassrooms Project 7 of the JS React application developer course.
+                        <br>
+                        I'm playing the role of a freelancer commissioned by the company "les petits plats". My mission
+                        is to develop a search engine consisting of a main search bar and advanced filters (tags).
+                        Based on a supplied JS file containing 50 recipes, the search engine must enable recipes to be
+                        sorted quickly and easily, and the results to be displayed on the page.
+                    </p>
+                    <p>
+                        In addition, two versions of the main search bar are being developed on two separate branches:
+                    </p>
+                    <ul>
+                        <li>
+                            search-bar-native-loop: the version using the native for...of loop for the main search bar
+                            engine
+                        </li>
+                        <li>
+                            search-bar-array-method: the version using the filter method for the main search bar
+                            engine
+                        </li>
+                    </ul>
+                    <p>
+                        The aim is to test which of these two methods is the most efficient by means of a performance
+                        study.
+                    </p>
+                    <p>
+                        Finally, an investigation sheet is produced to summarize the results of the performance
+                        study.
+                    </p>
+
+                    <h2>Architecture - 
+                        <a target="_blank" href="./pdf/architecture-du-projet.pdf">
+                            open in a larger format (PDF)
+                        </a>
+                    </h2>
+                    <img src="./img/architecture-du-projet.jpg" alt="Image de l'architecture du projet">
+                </div>
+            </div>
+            <footer class="footer">
+                <div class="content has-text-centered">
+                    <p>Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.2</a></p>
+                    <p class="sidebar-created-by">
+                        <a href="https://github.com/SoftwareBrothers/better-docs" target="_blank">BetterDocs theme</a>
+                        provided with <i class="fas fa-heart"></i> by
+                        <a href="http://softwarebrothers.co" target="_blank">SoftwareBrothers - JavaScript Development
+                            Agency</a>
+                    </p>
+                </div>
+            </footer>
+        </div>
+        <div id="side-nav" class="side-nav">
+        </div>
+    </div>
+
+    <script src="scripts/app.min.js"></script>
+    <script>PR.prettyPrint();</script>
+    <script src="scripts/linenumber.js"> </script>
+</body>
+
+</html>
