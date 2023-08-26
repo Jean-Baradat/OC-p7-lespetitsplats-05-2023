@@ -8,6 +8,10 @@
         gap: 1rem;
     }
 
+    .hidden-content {
+        filter: blur(8px);
+    }
+
     @include media-max ($mdBreakpoint) {
         .cards-area {
             grid-template-columns: repeat(2, 1fr);

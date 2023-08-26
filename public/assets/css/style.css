@@ -333,6 +333,9 @@ a {
   grid-template-rows: auto;
   gap: 1rem;
 }
+.home .hidden-content {
+  filter: blur(8px);
+}
 @media screen and (max-width: 1024px) {
   .home .cards-area {
     grid-template-columns: repeat(2, 1fr);
