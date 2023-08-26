@@ -4,7 +4,8 @@
   "description": "Projet 7 - Développez un algorithme de recherche en JavaScript",
   "scripts": {
     "sass": "sass --watch ./public/assets/sass/style.scss:./public/assets/css/style.css",
-    "sass-compressed": "sass --watch ./public/assets/sass/style.scss:./public/assets/css/style.min.css --style compressed"
+    "sass-compressed": "sass --watch ./public/assets/sass/style.scss:./public/assets/css/style.min.css --style compressed",
+    "docs": "jsdoc -c ./jsdoc.json -r ./public/assets/js/ -d ./docs"
   },
   "repository": {
     "type": "git",
@@ -25,7 +26,9 @@
     "url": "https://github.com/Jean-Baradat/OC-p7-lespetitsplats-05-2023/issues"
   },
   "homepage": "https://github.com/Jean-Baradat/OC-p7-lespetitsplats-05-2023#readme",
-  "dependencies": {
-    "sass": "^1.62.1"
+  "devDependencies": {
+    "better-docs": "^2.7.2",
+    "sass": "^1.66.1",
+    "taffydb": "^2.7.3"
   }
 }

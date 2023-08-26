@@ -368,6 +368,23 @@ a {
   grid-template-rows: auto;
   gap: 1rem;
 }
+.home .go-to-docs .docs-link {
+  position: fixed;
+  top: -2.2rem;
+  right: 0.9rem;
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.116);
+  color: rgb(0, 0, 0);
+  border-radius: 0 0 1rem 1rem;
+  transition: all 0.3s ease-in-out;
+  backdrop-filter: blur(3px);
+  border: 1px solid rgb(143, 143, 143);
+  font-weight: bold;
+}
+.home .go-to-docs .docs-link:hover {
+  top: -0.5rem;
+  box-shadow: 0 0 0.5rem 0.1rem rgba(197, 197, 197, 0.5);
+}
 @media screen and (max-width: 1024px) {
   .home .cards-area {
     grid-template-columns: repeat(2, 1fr);

@@ -1,7 +1,26 @@
+/**
+ * A collection of utility methods for various tasks.
+ * 
+ * @namespace Utils
+ * @version 1.0.0
+ * @since 1.0.0
+ * 
+ * @created 2023-05
+ * @updated 2023-08-26
+ * 
+ * @author Jean Baradat
+ * @modifiedby Jean Baradat
+ * 
+ * @property {method} minifyHTMLInArray - Minifies the HTML content of an array of objects based on a list of keys.
+ * @property {method} cutString - Cuts a string to a maximum length and adds ellipsis if necessary.
+ */
 const Utils = {
 
     /**
      * Minifies the HTML content of an array of objects based on a list of keys.
+     * 
+     * @memberof Utils
+     * @method minifyHTMLInArray
      * 
      * @param {Object[]} e - The array of objects to minify.
      * @param {string[]} filterListKey - The list of keys to minify.
@@ -19,6 +38,9 @@ const Utils = {
 
     /**
      * Cuts a string to a maximum length and adds ellipsis if necessary.
+     * 
+     * @memberof Utils
+     * @method cutString
      * 
      * @param {string} string - The string to cut.
      * @param {number} lengthMax - The maximum length of the string.
